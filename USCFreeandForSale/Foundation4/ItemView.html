@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+{% extends "views/_base.html" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Item View</title>
-
-  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
-  <link rel="stylesheet" href="css/normalize.css" />
-  <link rel="stylesheet" href="css/foundation.css" />
-
-  <!-- If you are using the gem version, you need this only -->
-  <link rel="stylesheet" href="css/app.css" />
-
-  <script src="js/vendor/custom.modernizr.js"></script>
-
-</head>
-<body>
-
-  <!-- body content here -->
+{% block content %}
+<!-- Everything above is for compatibility with _base.html -->
+<!-- Item name and line -->
 	<div class="row">
 		<div class="large-12 columns">
 			<h2>Item Name</h2>
@@ -28,9 +11,11 @@
 		</div>
 	</div>
 	<div class="row">
+		<!-- Sidebar reservation -->
 		<div class = "large-3 columns">
 			<p>Reserved for sidebar</p>
 		</div>
+		<!-- Information display -->
 		<div class = "large-9 columns">
 			<h3>Description</h3>
 			<div class="row">
@@ -65,34 +50,50 @@
 					</div>
 				</div>	
 			</div>
+			<!-- Open Modal button -->
 			<div class="row">
-				<p><a href="#" class="success button">Contact</a></p>
+				<a href="#" data-reveal-id="yourInfoModal" class="success button">Contact</a>
 			</div>
 		</div>
 	</div>
-  
-  <script>
+ 
+ <!-- Modal that asks for personal info input -->
+ <div id="yourInfoModal" class="reveal-modal">
+	<div class="row">
+		<h3>Input your personal information:</h3>
+		<hr />
+	</div>
+	<div class="row">
+		<label>Name</label>
+        <input type="text" placeholder="Your Name (e.g. John Smith)">
+	</div>
+	<div class="row">
+		<label>Contact Information</label>
+        <input type="text" placeholder="Your Number (e.g. 213-740-4321)">
+	</div>
+	<!-- Opens a confirmation modal that confirms clearing -->
+	<div class="row">
+		<a href="#" data-reveal-id="submitModal" class="success button">Submit</a>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- submitModal -->
+ <div id="submitModal" class="reveal-modal">
+	<h3>Submit successful!</h3>
+	<a class="close-reveal-modal" class="success button">Close</a>
+</div>
+
+<!-- Scripts gotten from http://foundation.zurb.com/docs/ -->
+ <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
   '.js><\/script>')
-  </script>
+ </script>
   <script src="js/foundation/foundation.js"></script>
-  <script src="js/foundation/foundation.alerts.js"></script>
-  <script src="js/foundation/foundation.clearing.js"></script>
-  <script src="js/foundation/foundation.cookie.js"></script>
-  <script src="js/foundation/foundation.dropdown.js"></script>
-  <script src="js/foundation/foundation.forms.js"></script>
-  <script src="js/foundation/foundation.joyride.js"></script>
-  <script src="js/foundation/foundation.magellan.js"></script>
-  <script src="js/foundation/foundation.orbit.js"></script>
-  <script src="js/foundation/foundation.placeholder.js"></script>
   <script src="js/foundation/foundation.reveal.js"></script>
-  <script src="js/foundation/foundation.section.js"></script>
-  <script src="js/foundation/foundation.tooltips.js"></script>
-  <script src="js/foundation/foundation.topbar.js"></script>
-  <script src="js/foundation/foundation.interchange.js"></script>
   <script>
     $(document).foundation();
   </script>
-</body>
-</html>
+  
+{% endblock %}
