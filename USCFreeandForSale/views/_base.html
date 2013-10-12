@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+    <!-- Made by RedandGoldFish HackSC Team 10 -->
+    <title>USC Free and For Sale</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/normalize.css" />
+    <script src="../Foundation4/js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body class="row">
+    <div> <!-- header -->
+        <img src="assets/images/banner.png" alt="USC Free and For Sale" /> <br />
+        <form action="" name="search" class="large-9 column">
+            <input type="text" placeholder="search"/>
+        </form>
+
+        <form action="" name="jumpto" class="large-3 column">
+            <select class="medium">
+                <option DISABLED SELECTED>Jump to...</option>
+                <option>Sell</option>
+            </select>
+        </form>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <div> <!-- main content -->
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
+{% endautoescape %}
