@@ -1,36 +1,116 @@
 <!DOCTYPE html>
 {% autoescape true %}
-<html>
 <head>
-    <!-- Made by RedandGoldFish HackSC Team 10 -->
-    <title>USC Free and For Sale</title>
-
-    <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.min.css" />
+	<!-- Made by RedandGoldFish HackSC Team 10 -->
+	<title>USC Free and For Sale</title>
+	
+	<link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/normalize.css" />
     <script src="assets/Foundation4/js/vendor/custom.modernizr.js"></script>
-
 </head>
-<body class="row">
-    <div> <!-- header -->
-        <img src="assets/images/banner.png" alt="USC Free and For Sale" /> <br />
-        <form action="" name="search" class="large-9 column">
-            <input type="text" placeholder="search"/>
-        </form>
 
-        <form action="" name="jumpto" class="large-3 column">
-            <select class="medium">
-                <option DISABLED SELECTED>Jump to...</option>
-                <option>Sell</option>
-            </select>
-        </form>
+<body class=row">
+<!--Header-->
+  <div class="row">
+    <div class="large-12 columns">
+        <h1><img src="assets/images/banner.png" alt="USC Free and For Sale"></img></h1>
     </div>
+  </div>
+  
+<!--Search Bar-->
+  <div class="row"><form>
+	<div class="large-2 columns" data-options="is_hover:true">
+		<form class="custom">
+		<select id="searchCat">
+		<option>All Categories</option>
+		<option>Appliances</option>
+		<option>Furniture</option>
+		<option>Clothing</option>
+		<option>Tickets</option>
+		<option>Books</option>
+		<option>Misc</option>
+		<option>Housing</option>
+		<option>Electronics</option>
+		<option>Transportation</option>
+		</select>
+		</form>
+    </div>
+	
+	<div class="large-8 columns">
+		<input type="text" placeholder="Search"></input>
+	</div>
+	
+	<div class="large-2 columns">
+		<a href="#" class="button prefix">Search</a>
+	</div>
+  </form></div>
 
-    <div style="clear:both;"></div>
-
-    <div> <!-- main content -->
+<!--Navigation-->
+  <div class="large-4 columns">
+	<div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+		<h4><a href="#">Browse</a></h4>
+		<h4><a href="#">Sell an Item</a></h4>
+		<h4><a href="#">My Items</a></h4>
+		<h4>Categories</h4>
+		<div class="large-offset-1 columns">
+			<h4 class="title"><a href="#">Appliances</a></h4>
+			<h4 class="title"><a href="#">Furniture</a></h4>
+			<h4 class="title"><a href="#">Clothing</a></h4>
+			<h4 class="title"><a href="#">Tickets</a></h4>
+			<h4 class="title"><a href="#">Books</a></h4>
+			<h4 class="title"><a href="#">Electronics</a></h4>
+			<h4 class="title"><a href="#">Transportation</a></h4>
+			<h4 class="title"><a href="#">Housing</a></h4>
+			<h4 class="title"><a href="#">Misc</a></h4>
+		</div>
+	</div>
+  </div>
+  
+<!--Main Section-->
+	<div class="large-8 columns">
         {% block content %}{% endblock %}
-    </div>
-
+	</div>
+	
+<!--Footer-->
+  <footer class="row">
+	<div class="large-12 columns">
+		<div class="large-5 columns">
+          <p>&copy; Copyright Red&GoldFish</p>
+        </div>
+        <div class="large-7 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+	</div>
+  </footer>
+  
+ <!--Javascript-->
+  <script>
+	document.write('<script src=' +
+	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+	'.js><\/script>')
+  </script>
+  
+	<script src="js/foundation/foundation.js"></script>
+	<script src="js/foundation/foundation.alerts.js"></script>
+	<script src="js/foundation/foundation.clearing.js"></scrip>
+	<script src="js/foundation/foundation.cookie.js"></script>
+	<script src="js/foundation/foundation.dropdown.js"></script>
+	<script src="js/foundation/foundation.forms.js"></script>
+	<script src="js/foundation/foundation.joyride.js"></script>
+	<script src="js/foundation/foundation.magellan.js"></script>
+	<script src="js/foundation/foundation.orbit.js"></script>
+	<script src="js/foundation/foundation.placeholder.js"></script>
+	<script src="js/foundation/foundation.reveal.js"></script>
+	<script src="js/foundation/foundation.section.js"></script>
+	<script src="js/foundation/foundation.tooltips.js"></script>
+	<script src="js/foundation/foundation.topbar.js"></script>
+	<script src="js/foundation/foundation.interchange.js"></script>
+	<script>
+		$(document).foundation();
+	</script>
 </body>
 </html>
 {% endautoescape %}
