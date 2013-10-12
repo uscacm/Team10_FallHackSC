@@ -1,0 +1,106 @@
+{% extends "views/_base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<body>
+ <!-- Header and Nav -->
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <h1>I <3 Sheep</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Header and Nav -->
+
+
+  <div class="row">
+
+
+
+ <!-- Nav Sidebar -->
+<!-- Main Section to Sell-->
+    
+		<font size=6 ><b>Sell Item</b></font>
+		<div class = "panel">
+		<!-- Content for the sell area -->
+		<div id = "sellContent">
+			<!-- Item row -->
+			<div class="row">
+				<div class="large-2 columns">
+					<h6 class="title"> Item: </h6>
+				</div>
+				<div class="large-4 columns">
+						<form>
+						<input type="textarea" name="item">
+						</form>
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-6 columns">
+				</div>
+				
+			<!-- Photo area -->
+			</div>
+			<div class = "row">
+				<div class="large-2 columns">
+					<h6 class="title"> Photo: </h6>
+				</div>
+				<div class="large-5 columns">
+					<form>
+					<input type="file" name="datafile" size="40">
+					</form>
+				</div>
+				<!-- empty div -->
+				<div class="large-5 columns">
+				</div>
+			
+			<!-- Category section -->
+			</div>
+			<div class="row">
+				<div class="large-2 columns">
+					<h6> Category: </h6>
+				</div>
+						<div class="large-3 columns">
+							<select>
+								<option value="Appliances">Appliances</option>
+								<option value="Books">Books</option>
+								<option value="Clothing">Clothing</option>
+								<option value="Electronics">Electronics</option>
+								<option value="Furniture">Furniture</option>
+								<option value="Housing">Housing</option>
+								<option value="Tickets">Tickets</option>
+								<option value="Transportation">Transportation</option>
+								<option value="Vehicle">Vehicle</option>
+								<option value="Misc">Misc</option>
+							</select>
+						</div>
+						<!-- empty div to fill up space -->
+						<div class="large-7 columns"> </div>
+				</div>
+			</div>
+			
+			
+			<!-- Description area -->
+			<h6 class="title"> Description: </h6>
+				<form>
+				<textarea name="item" rows="5" cols="60"></textArea>
+				</form>
+			<h6 class="title"> Location: </h6>
+				<form>
+				<input type="textarea" name="item">
+				</form>
+			<div id = "contactInfo">
+				<h6 class="title"> Contact Information: </h6>
+				<h6 class="title"> Contact Information: </h6>
+			</div>
+		</div>
+	
+	</div>
+
+{% endblock %}
