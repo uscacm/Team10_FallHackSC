@@ -43,7 +43,7 @@
 			  <li class=\"description\">Location: " + pendingItemsLocation[i] + "</li>\
 			</ul>\
 		  </div>\
-		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
+		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
 		</div>";
 	}
 	
@@ -90,6 +90,52 @@
 		closeModal('#editModal');
 	  }
 	}
+	function updateEditModal(idString) {
+	  if(idString.match("buttonEditPending") != null) {
+		var indexOfID = parseInt(idString.slice(17, idString.length));
+		var HTMLtoReturn = "\
+		  <form class=\"custom\"><!--Create a form-->\
+			<fieldset>\
+			  <legend><h3>Edit Item</h3></legend>\
+			  <label><h4>Title</h4></label>\
+			  <input type=\"text\" placeholder=\"Title of your item\" value=\"" + pendingItemsTitle[indexOfID] + "\">\
+			  <form class=\"custom\"><!--Form for a dropdown-->\
+				<label for=\"customDropdown\"><h4>Category</h4></label>\
+				<select id=\"customDropdown\">\
+				  <option>Choose a category...</option>\
+				  <option>Appliances</option>\
+				  <option>Furniture</option>\
+				  <option>Clothing</option>\
+				  <option>Tickets</option>\
+				  <option>Books</option>\
+				  <option>Electronics</option>\
+				  <option>Transportation</option>\
+				  <option>Housing</option>\
+				  <option>Misc</option>\
+				</select>\
+			  </form>\
+			  <label><h4>Description</h4></label>\
+			  <textarea placeholder=\"Description of your item\" style=\"width:100%; height:50px; resize:vertical;\">"  + pendingItemsDescription[indexOfID] + "</textarea>\
+			  <label><h4>Photo</h4></label>\
+			  <input type=\"file\">\
+			  <label><h4>Location</h4></label>\
+			  <input type=\"text\" placeholder=\"Where to get your item\" value=\"" + pendingItemsLocation[indexOfID] + "\">\
+			  <label><h4>Contact Info</h4></label>\
+			  <input type=\"text\" placeholder=\"Email, phone, or anything else\">\
+			</fieldset>\
+			<fieldset>\
+			  <legend><h2>Delete</h2></legend>\
+			  <label><h3>Are you sure you want to delete this item?</h3></label>\
+			  <div style=\"text-align:center; width:100%; margin:10px\">\
+				<button onClick=\"deleteItem(currentID\" class=\"button\">Yes</button><!--Fires the deleteItem function in the top script-->\
+				<button onClick=\"closeModal('#editModal');\" class=\"button\">No</button>\
+			  </div>\
+			</fieldset>\
+		  </form>";
+      console.log(HTMLtoReturn);
+	  document.getElementById("editModalInner").innerHTML = HTMLtoReturn;
+	  }
+	}
 	
 	<!--Closes the modal with id idString, with syntax '#MODALNAME'-->
 	function closeModal(idString) {
@@ -125,46 +171,9 @@
     </ul>
   </div>
   
-  <!--Modal to edit an item-->
+  <!--Modal to edit or delete an item-->
   <div id="editModal" class="reveal-modal">
-  	<form class="custom"><!--Create a form-->
-      <fieldset>
-        <legend><h3>Edit Item</h3></legend>
-        <label><h4>Title</h4></label>
-        <input type="text" placeholder="Title of your item">
-        <form class="custom"><!--Form for a dropdown-->
-          <label for="customDropdown"><h4>Category</h4></label>
-          <select id="customDropdown">
-            <option>Choose a category...</option>
-            <option>Appliances</option>
-            <option>Furniture</option>
-            <option>Clothing</option>
-            <option>Tickets</option>
-            <option>Books</option>
-            <option>Electronics</option>
-            <option>Transportation</option>
-            <option>Housing</option>
-            <option>Misc</option>
-          </select>
-        </form>
-        <label><h4>Description</h4></label>
-        <textarea placeholder="Description of your item" style="width:100%"></textarea>
-        <label><h4>Photo</h4></label>
-        <input type="file" placeholder="Upload a photo of your item">
-        <label><h4>Location</h4></label>
-        <input type="text" placeholder="Where to get your item">
-        <label><h4>Contact Info</h4></label>
-        <input type="text" placeholder="Email, phone, or anything else">
-      </fieldset>
-      <fieldset>
-        <legend><h2>Delete</h2></legend>
-        <label><h3>Are you sure you want to delete this item?</h3></label>
-        <div style="text-align:center; width:100%; margin:10px">
-          <button onClick="deleteItem(currentID)" class="button">Yes</button><!--Fires the deleteItem function in the top script-->
-          <button onClick="closeModal('#editModal');" class="button">No</button>
-        </div>
-      </fieldset>
-    </form>
+  	<div id= editModalInner></div>
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
