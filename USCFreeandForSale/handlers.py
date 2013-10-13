@@ -105,8 +105,14 @@ class ItemPage(BaseRequestHandler):
         template_values = {}
         self.render('Item_View.html', template_values)
 
-  
+class TestPage(BaseRequestHandler):
+    def get(self): 
+        template_values = {}
+        self.render('test.html', template_values)
 
+    def post(self):
+        template_values = {}
+        self.render('test.html', template_values)
 
 class RootHandler(BaseRequestHandler):
   def get(self):
