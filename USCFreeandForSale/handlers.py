@@ -139,7 +139,7 @@ class AddItemPage(BaseRequestHandler):
                       pickup_location=self.request.get('location'),
                       contact_method=self.request.get('contact'))
       if (self.request.get('file_url') != ' '):
-        photo_url = self.request.get('file_url'))
+        photo_url = self.request.get('file_url')
         new_item.photo_url = photo_url
       if (self.request.get('category') != 'CATEGORY'):
         category = Category.all().filter('name=', self.request.get('category')).get()
