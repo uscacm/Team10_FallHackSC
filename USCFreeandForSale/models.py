@@ -41,4 +41,6 @@ class Item(db.Model):
     data_source = db.IntegerProperty(required=True)
 	#0 for user input , 1 from facebook group.
     sold_date = db.DateProperty(required=False)
+    pickup_location = db.StringProperty(required=False)
+    contact_method = db.StringProperty(required=True)
     created = db.DateProperty(auto_now_add=True)

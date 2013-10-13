@@ -134,14 +134,16 @@ class AddItemPage(BaseRequestHandler):
     else: 
       new_item = Item(item_name=self.request.get('item_name'), 
                             description=self.request.get('description'), 
-                            data_source=0)
+                            data_source=0,
+                            pickup_location=self.request.get('location'),
+                            contact_method=self.request.get('contact'))
       # if (self.request.get('category') != 'CATEGORY'):
       #   categories = Category.all()
-      #   category = categories.filter('name=', self.request.get('category'))
+      #   categories.filter('name ==', self.request.get('category'))
       #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
-      #   new_item.category = category;
+        # new_item.category = categories.fetch(1);
       if (self.request.get('price').isdigit() ):
-		  new_item.price =  float(self.request.get('price'))
+		    new_item.price =  float(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
       template_values['item'] = new_item
