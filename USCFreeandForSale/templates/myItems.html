@@ -19,7 +19,43 @@
 	}
   </style>
   
+  
   <script>
+	var pendingItemsArray = new Array();
+	var pendingItemsSize = 5;
+	function updatePendingItems() {
+	  var pendingItemsHTML="";
+	  for(var i=0; i<pendingItemsSize; i++) {
+		pendingItemsArray[i] = "\
+		  <div class=\"item_Box\" id=\"item_Box_Edit\">\
+			<h3>Title Of Item " + (i+1) + "</h3>\
+			<p>Location: Location of Item</p>\
+			<p>Description of Item</p>\
+			<input name=\"Edit Item\" type=\"button\" data-reveal-id=\"editModal\" value=\"Edit Item\" />\
+			<input name=\"Delete Item\" type=\"button\" data-reveal-id=\"deleteModal\" value=\"Delete Item\" />\
+		  </div>"
+		pendingItemsHTML+=pendingItemsArray[i];
+	  }
+	  return pendingItemsHTML;
+	}
+	
+	var buyRequestItemsArray = new Array();
+	var buyRequestItemsSize = 5;
+	function updateBuyRequestItems() {
+	  var buyRequestItemsHTML="";
+	  for(var i=0; i<buyRequestItemsSize; i++) {
+		buyRequestItemsArray[i] = "\
+		  <div class=\"item_Box\" id=\"item_Box_Edit\">\
+			<h3>Title Of Item " + (i+1) + "</h3>\
+			<p>Location: Location of Item</p>\
+			<p>Description of Item</p>\
+			<input name=\"Edit Item\" type=\"button\" data-reveal-id=\"editModal\" value=\"Edit Item\" />\
+			<input name=\"Delete Item\" type=\"button\" data-reveal-id=\"deleteModal\" value=\"Delete Item\" />\
+		  </div>"
+		buyRequestItemsHTML+=buyRequestItemsArray[i];
+	  }
+	  return buyRequestItemsHTML;
+	}
   </script>
   
   <div id="my_Items_Title">
@@ -29,41 +65,7 @@
   <hr />
   <div class="scroll_Area">
     <ul class="small-block-grid-2">
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
+    <div id="pendingArea"></div>
     </ul>
   </div>
   
@@ -71,41 +73,7 @@
   <hr />
   <div class="scroll_Area">
     <ul class="small-block-grid-2">
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
-      <div class="item_Box" id="item_Box_Edit">
-        <h3>Title Of Item</h3>
-        <p>Location: Location of Item</p>
-        <p>Description of Item</p>
-        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
-      </div>
+      <div id="buyRequestArea"></div>
     </ul>
   </div>
   
@@ -156,8 +124,13 @@
     <form>
     <a class="close-reveal-modal">&#215;</a>
   </div>
-
-<script>
+  	
+  <script>
+	document.getElementById("pendingArea").innerHTML = updatePendingItems();
+	document.getElementById("buyRequestArea").innerHTML = updateBuyRequestItems();
+  </script>
+  
+  <script>
 	document.write('<script src=' +
 	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
 	'.js><\/script>')
