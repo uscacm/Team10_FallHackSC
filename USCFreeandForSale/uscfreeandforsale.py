@@ -28,8 +28,8 @@ application = webapp2.WSGIApplication([
     Route('/',               'handlers.MainPage',     name="home"),
     Route('/sell',           'handlers.SellPage',     name="sell"),
     Route('/browse',         'handlers.BrowsePage',   name="browse"),
-    Route('/item/(\d+)',     'handlers.ItemPage:one', name='item'),
-    Route('/items',          'handlers.ItemPage:all', name='items'),
+    #Route(r'/item/(\d+)',     'handlers.ItemPage', name='item'),
+    Route('/hotdog',          'handlers.ItemListPage', name='items'),
     Route('/test',           'handlers.TestPage',     name='test'),  #DEBUG_REMOVE
     Route('/myitem',         'handlers.MyItemPage',       name='myitem'), #DEBUG_REMOVE
 

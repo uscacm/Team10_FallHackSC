@@ -106,13 +106,23 @@ class BrowsePage(BaseRequestHandler):
         self.render('items_list.html', template_values)
         
 class ItemPage(BaseRequestHandler):
-    def one(self): 
+
+    def get(self):
+        self.post()
+
+    def post(self): 
         template_values = {}
         self.render('myItems.html', template_values)
 
-    def all(self):
-        template_values = {}
-        self.render('Item_View.html', template_values)
+
+class ItemListPage(BaseRequestHandler):
+
+    def get(self):
+      self.post()
+
+    def post(self):
+      template_values = {}
+      self.render('Item_View.html', template_values)
 
 #DEBUG_REMOVE
 class TestPage(BaseRequestHandler):
