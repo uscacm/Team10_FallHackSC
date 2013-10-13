@@ -2,6 +2,7 @@
 {% autoescape true %}
 <html class="no-js" lang="en">
 <head>
+
 	<!-- Made by RedandGoldFish HackSC Team 10 -->
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
@@ -12,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.css" />
     <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/normalize.css" />
     <script src="assets/Foundation4/assets/Foundation4/js/vendor/custom.modernizr.js"></script>
+
 </head>
 
 <body class="row">
@@ -53,7 +55,7 @@
 
  <div class="row"><p><p></div>			<!--Find a better way to do this!-->
 
-<!--Navigation-->
+<!-- Navigation -->
   <div class="large-3 columns">
 	<div class="nav-bar vertical">
 		<h4><a href="test">Test</a></h4>
@@ -75,24 +77,26 @@
 		</div>
 	</div>
   </div>
-
-<!--Main Section-->
+  
+<!-- Main Section -->
 
 	<div class="large-9 columns">
         {% block content %}{% endblock %}
 	</div>
 	
-<!--Footer-->
-  <div class="row">
-  <p><p><p><p><p>
+	<!--Footer-->
+  <div class="row" style="height: 400px; position:absolute;">
+  	&nbsp;
   </div>
 
-<!--Javascript-->
+
+  <!-- Javascript -->
   <script>
 	document.write('<script src=' +
-	('__proto__' in {} ? 'assets/Foundation4/js/vendor/zepto' : 'assets/Foundation4/js/vendor/jquery') +
+	('__proto__' in {} ? '/assets/Foundation4/js/vendor/zepto' : '/assets/Foundation4/js/vendor/jquery') +
 	'.js><\/script>')
   </script>
+<<<<<<< HEAD
   
   <script src="assets/Foundation4/js/foundation/foundation.js"></script>
   <script src="assets/Foundation4/js/foundation/foundation.alerts.js"></script>
@@ -113,6 +117,9 @@
   
   <!-- Custom Javascript shit. -->
   <script src="assets/js/image_viewer.js"></script>
+=======
+
+  <script src="/assets/Foundation4/js/foundation.min.js"></script>
   <script>
 	$(document).foundation();
   </script>

@@ -5,6 +5,7 @@ import secrets
 import webapp2
 
 import facebook
+import json
 
 from webapp2_extras import auth, sessions, jinja2
 from jinja2.runtime import TemplateNotFound
@@ -72,23 +73,31 @@ class BaseRequestHandler(webapp2.RequestHandler):
 
 
 class MainPage(BaseRequestHandler):
+
     def get(self): 
         self.post()
 
     def post(self):
+        logging.info(self.request)
         template_values = {}
         self.render('index.html', template_values)
 
 
 class SellPage(BaseRequestHandler):
+
     def get(self): 
         self.post()
 
     def post(self):
         template_values = {}
-        self.render('newItem.html', template_values)
+        if not self.logged_in:
+          self.redirect('/auth/facebook')
+        else:
+          template_values['current_user'] = self.current_user
+          self.render('newItem.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
+
     def get(self): 
         self.post()
 
@@ -97,16 +106,27 @@ class BrowsePage(BaseRequestHandler):
         self.render('items_list.html', template_values)
         
 class ItemPage(BaseRequestHandler):
-    def one(self): 
+
+    def get(self):
+        self.post()
+
+    def post(self): 
         template_values = {}
         self.render('myItems.html', template_values)
 
-    def all(self):
-        template_values = {}
-        self.render('Item_View.html', template_values)
+
+class ItemListPage(BaseRequestHandler):
+
+    def get(self):
+      self.post()
+
+    def post(self):
+      template_values = {}
+      self.render('Item_View.html', template_values)
 
 #DEBUG_REMOVE
 class TestPage(BaseRequestHandler):
+
     def get(self): 
         template_values = {}
         self.render('test.html', template_values)
@@ -117,6 +137,7 @@ class TestPage(BaseRequestHandler):
 
 #DEBUG_REMOVE
 class MyItemPage(BaseRequestHandler):
+
     def get(self): 
         template_values = {}
         self.render('myItems.html', template_values)
@@ -126,11 +147,13 @@ class MyItemPage(BaseRequestHandler):
         self.render('myItems.html', template_values)
 
 class RootHandler(BaseRequestHandler):
+
   def get(self):
     """Handles default langing page"""
     self.render('home.html')
     
 class ProfileHandler(BaseRequestHandler):
+
   def get(self):
     """Handles GET /profile"""    
     if self.logged_in:

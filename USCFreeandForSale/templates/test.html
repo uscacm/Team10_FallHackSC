@@ -24,25 +24,19 @@
    
    function postOnWall() {
 		FB.ui(
-  {
-    method: 'feed',
-    name: 'Facebook Dialogs'
-  },
-  function(response) {
-    if (response && response.post_id) {
-      alert('Post was published.');
-    } else {
-      alert('Post was not published.');
-    }
+      {
+        method: 'feed',
+        name: 'Facebook Dialogs'
+      },
+      function(response) {
+        if (response && response.post_id) {
+          alert('Post was published.');
+        } else {
+          alert('Post was not published.');
+        }
+      }
+    );
   }
-);
-   }
-   
-   function sendMessage() {
-   FB.ui({
-  method: 'send'
-});
-}
 </script>
 
 Hello world!

@@ -2,18 +2,22 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!-- Nav Sidebar -->
+<!-- Main Section to Sell-->
+
 
 <div class="row">
+=======
+<h2>
+	{% if logged_in %}
+		Hi {{ current_user.name }}, sell your item below:
+	{% else %}
+		Not logged in.
+	{% endif %}
+</h2>
 
- <!-- Nav Sidebar -->
-<!-- Main Section to Sell-->
- 
- 
-<font size=6 ><b>Sell Item</b></font><br><hr><br>
-	
+<div class="panels">
+
 	<form data-abide>
 		<div class = "large-11 columns">
 		<!-- Content for the sell area -->
@@ -145,7 +149,5 @@
 	</form>
 
 </div>
-	
-	<br><br><br><br><br><br>
 
 {% endblock %}
