@@ -189,7 +189,7 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     # http://code.google.com/p/webapp-improved/issues/detail?id=20
 
 
-      auth_id = '%s:%s' % (provider, data['id'])
+    auth_id = '%s:%s' % (provider, data['id'])
     logging.info('Looking for a user with id %s', auth_id)
     
     user = self.auth.store.user_model.get_by_auth_id(auth_id)
