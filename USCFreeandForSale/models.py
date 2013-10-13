@@ -11,26 +11,6 @@ class Category(db.Model):
     visible = db.BooleanProperty()
 
 
-
-appliances = Category(name="Appliances")
-appliances.put()
-furniture = Category(name="Furniture")
-furniture.put()
-clothing = Category(name="Clothing")
-clothing.put()
-tickets = Category(name="Tickets")
-tickets.put()
-books = Category(name="Books")
-books.put()
-electronics = Category(name="Electronics")
-electronics.put()
-transportation = Category(name="Transporation")
-transportation.put()
-housing = Category(name="Housing")
-housing.put()
-misc = Category(name="Misc")
-misc.put()
-
 class User(db.Model):
     fbid = db.StringProperty(required=True)
     first_name = db.StringProperty(required=True)

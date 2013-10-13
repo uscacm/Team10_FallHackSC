@@ -81,7 +81,9 @@ class BaseRequestHandler(webapp2.RequestHandler):
     try:
       self.response.write(self.jinja2.render_template(template_name, **values))
     except TemplateNotFound:
-      self.abort(404 def head(self, *args):
+      self.abort(404)
+
+  def head(self, *args):
     """Head is used by Twitter. If not there the tweet button shows 0"""
     pass
 
@@ -132,16 +134,16 @@ class AddItemPage(BaseRequestHandler):
     if not self.logged_in:
       self.redirect('/auth/facebook')
     else: 
-      new_item = Models.Item(item_name=self.request.get('item_name'), 
+      new_item = Item(item_name=self.request.get('item_name'), 
                             description=self.request.get('description'), 
                             data_source=0)
       # if (self.request.get('category') != 'CATEGORY'):
-      #   categories = Models.Category.all()
+      #   categories = Category.all()
       #   category = categories.filter('name=', self.request.get('category'))
-      #   # category = Models.Category.gql("WHERE name='%s'" % self.request.get('category'))
+      #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
       #   new_item.category = category;
-      if (self.request.get('price')):
-        new_item.price =  Decimal(self.request.get('price'))
+      # if (self.request.get('price')):
+      #   new_item.price =  Decimal(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
       self.render('ItemView.html', template_values)
@@ -165,7 +167,7 @@ class SearchHandler(BaseRequestHandler):
       ### https://www.google.com/events/io/2011/sessions/full-text-search.html
       ### NEed to insert items into the index when they get inserted into the db, update them aswell
       ###
-        if not self.request.get('q')
+        if not self.request.get('q'):
           self.abort(404)
           return
 
