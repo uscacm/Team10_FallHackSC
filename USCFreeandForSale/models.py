@@ -23,7 +23,8 @@ def AddItemSearchIndexes(item):
         fields = [
            search.TextField(name='title', value=item.title),
            search.TextField(name='description', value=item.description),
-           search.TextField(name='category', value=cat)
+           search.TextField(name='category', value=cat),
+           search.NumberField(name='price',value=item.price)
         ]
     )
     new_search_document.put()

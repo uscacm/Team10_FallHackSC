@@ -143,12 +143,15 @@ class AddItemPage(BaseRequestHandler):
         category = Category.all().filter('name=', self.request.get('category')).get()
         new_item.category = category
 
+      if (self.request.get('price').isdigit() ):
+		    new_item.price = float(self.request.get('price'))
+
+      new_item.put()
+
       # Can comment out if broken
       AddItemSearchIndexes(new_item)
 
-      if (self.request.get('price').isdigit() ):
-		    new_item.price = float(self.request.get('price'))
-      new_item.put()
+
       template_values['current_user'] = self.current_user
       template_values['item'] = new_item
       self.render('ItemView.html', template_values)
@@ -159,7 +162,7 @@ class BrowsePage(BaseRequestHandler):
       self.post()
 
   def post(self):
-      template_values = {}
+      template_values = {'items':Item.all()}
       self.render('items_list.html', template_values)
        
 class SearchHandler(BaseRequestHandler):
