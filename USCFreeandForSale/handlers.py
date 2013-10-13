@@ -3,9 +3,10 @@ import logging
 import secrets
 
 import webapp2
-import jinja2
+
 import facebook
-from webapp2_extras import auth, sessions
+
+from webapp2_extras import auth, sessions, jinja2
 from jinja2.runtime import TemplateNotFound
 
 from simpleauth import SimpleAuthHandler
@@ -38,13 +39,13 @@ class BaseRequestHandler(webapp2.RequestHandler):
   
   @webapp2.cached_property
   def current_user(self):
-    """Returns currently logged in user"""
+    """ Returns currently logged in user """
     user_dict = self.auth.get_user_by_session()
     return self.auth.store.user_model.get_by_id(user_dict['user_id'])
       
   @webapp2.cached_property
   def logged_in(self):
-    """Returns true if a user is currently logged in, false otherwise"""
+    """ Returns true if a user is currently logged in, false otherwise """
     return self.auth.get_user_by_session() is not None
   
       
@@ -68,7 +69,6 @@ class BaseRequestHandler(webapp2.RequestHandler):
   def head(self, *args):
     """Head is used by Twitter. If not there the tweet button shows 0"""
     pass
-    
 
 
 class MainPage(BaseRequestHandler):
