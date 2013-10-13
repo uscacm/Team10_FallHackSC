@@ -215,8 +215,9 @@ class ItemPage(BaseRequestHandler):
       self.post(item_id)
 
   def post(self, item_id): 
-      template_values = {}
-      self.render('ItemView.html', template_values)
+    item = Item.get(item_id)
+    template_values = {'item': item}
+    self.render('ItemView.html', template_values)
 
 
 class ItemListPage(BaseRequestHandler):
