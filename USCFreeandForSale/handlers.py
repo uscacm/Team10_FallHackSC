@@ -149,7 +149,7 @@ class AddItemPage(BaseRequestHandler):
       new_item.put()
 
       # Can comment out if broken
-      AddItemSearchIndexes(new_item)
+      # AddItemSearchIndexes(new_item)
 
 
       template_values['current_user'] = self.current_user
