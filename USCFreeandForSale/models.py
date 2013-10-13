@@ -1,7 +1,7 @@
 import datetime
 from google.appengine.ext import db
 from google.appengine.api import users
-
+from google.appengine.api import search 
 
 class Category(db.Model):
     name = db.StringProperty(required=True)
@@ -12,20 +12,21 @@ class Category(db.Model):
 
 def AddItemSearchIndexes(item):
     
+    
+    fields = [
+       search.TextField(name='name', value=item.item_name),
+       search.TextField(name='description', value=item.description)
+    ]
+
     # Setting the doc_id is optional. If omitted, the search service will create an identifier.
-    if not item.category:
-        cat = None
-    else:
-        cat = item.category.slug
+    if item.category:
+        fields.append(search.TextField(name='category', value=cat))
+    if item.price:
+        fields.append(search.NumberField(name='price', value=item.price))
 
     new_search_document = search.Document(
         doc_id = item.key,
-        fields = [
-           search.TextField(name='title', value=item.title),
-           search.TextField(name='description', value=item.description),
-           search.TextField(name='category', value=cat),
-           search.NumberField(name='price',value=item.price)
-        ]
+        fields = fields
     )
     new_search_document.put()
 

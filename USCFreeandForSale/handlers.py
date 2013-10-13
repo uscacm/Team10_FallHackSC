@@ -190,9 +190,9 @@ class SearchHandler(BaseRequestHandler):
       try:
         items_index = search.Index(name='items_search')
         if self.request.get('cat'):
-          search_results = index.search('title:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
+          search_results = index.search('name:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
         else:
-          search_results = index.search('title:"' + query + '" AND desc:"' + query + '"')
+          search_results = index.search('name:"' + query + '" AND desc:"' + query + '"')
         template_values = {results: search_results}
         self.render('search_results.html', template_values)
         return
