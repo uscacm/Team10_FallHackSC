@@ -30,10 +30,18 @@
 	var pendingItemsLocation = new Array();
 	var pendingItemsSize = 5;
 	for(var i=0; i<pendingItemsSize; i++) { <!--Assigns HTML to each pendingItem-->
-      pendingItemsTitle[i] = "Bicycle " + i;
-	  pendingItemsPrice[i] = i*4.99;
-	  pendingItemsDescription[i] = "Shiny red bike. I have a bunch of these that need to go.";
-	  pendingItemsLocation[i] = "USC Parkside #20"+i;
+      pendingItemsTitle[0] = "Blue Unicycle";
+	  pendingItemsTitle[1] = "Red Bicycle";
+	  pendingItemsTitle[2] = "Longboard";
+	  pendingItemsTitle[3] = "Shortboard";
+	  pendingItemsTitle[4] = "Chair";
+	  pendingItemsPrice[i] = i*4.99+2.54;
+	  pendingItemsDescription[0] = "Shiny blue unicycle. I have a bunch of these that need to go.";
+	  pendingItemsDescription[1] = "Shiny red bike. It's like really shiny.";
+	  pendingItemsDescription[2] = "Longboard. Wheels not included.";
+	  pendingItemsDescription[3] = "Shortboard too short for me.";
+	  pendingItemsDescription[4] = "Needs legs.";
+	  pendingItemsLocation[i] = "USC Parkside #" + (135*(i+1));
 	  pendingItemsArray[i] = "\
 		<div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
 		  <div style=\"height:145px;\">\
@@ -53,11 +61,13 @@
 	var buyRequestItemsPrice = new Array();
 	var buyRequestItemsDescription = new Array();
 	var buyRequestItemsLocation = new Array();
-	var buyRequestItemsSize = 5;
+	var buyRequestItemsSize = 2;
 	for(var i=0; i<buyRequestItemsSize; i++) { <!--Assigns HTML to each buyRequestItem-->
-	  buyRequestItemsTitle[i] = "Car " + i;
-	  buyRequestItemsPrice[i] = i*4.99;
-	  buyRequestItemsDescription[i] = "I'm a car dealership! Please buy."
+	  buyRequestItemsTitle[0] = "Toyota Junker";
+      buyRequestItemsTitle[1] = "Ferrari";	  
+	  buyRequestItemsPrice[i] = (i+1)*321804.99;
+	  buyRequestItemsDescription[0] = "Used toyota. Has no seats."
+	  buyRequestItemsDescription[1] = "It's actually a toy car."
 	  buyRequestItemsLocation[i] = "Felix Cars";
 	  buyRequestItemsArray[i] = "\
 	    <div class=\"item_Box\" id=\"item_Box_BuyReqeust_" + i + "\">\
