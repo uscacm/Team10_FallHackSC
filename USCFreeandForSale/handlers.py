@@ -97,6 +97,26 @@ class SellPage(BaseRequestHandler):
           template_values['current_user'] = self.current_user
           self.render('newItem.html', template_values)
 
+class AddItemPage(BaseRequestHandler):
+  def post(self):
+    template_values = {}
+    if not self.logged_in:
+      self.redirect('/auth/facebook')
+    else: 
+      new_item = Models.Item(item_name=self.request.get('item_name'), 
+                            description=self.request.get('description'), 
+                            data_source=0)
+      # if (self.request.get('category') != 'CATEGORY'):
+      #   categories = Models.Category.all()
+      #   category = categories.filter('name=', self.request.get('category'))
+      #   # category = Models.Category.gql("WHERE name='%s'" % self.request.get('category'))
+      #   new_item.category = category;
+      if (self.request.get('price')):
+        new_item.price =  Decimal(self.request.get('price'))
+      new_item.put()
+      template_values['current_user'] = self.current_user
+      self.render('ItemView.html', template_values)
+
 class BrowsePage(BaseRequestHandler):
 
     def get(self): 

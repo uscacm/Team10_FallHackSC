@@ -27,6 +27,7 @@ application = webapp2.WSGIApplication([
     # app routes
     Route('/',               'handlers.MainPage',     name="home"),
     Route('/sell',           'handlers.SellPage',     name="sell"),
+    Route('/additem',       'handlers.AddItemPage',  name="additem"),
     Route('/browse',         'handlers.BrowsePage',   name="browse"),
     Route(r'/item/<item_id:\d+>',    'handlers.ItemPage',     name='item'),
     Route('/items',          'handlers.ItemListPage', name='items'),
