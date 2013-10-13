@@ -12,7 +12,8 @@ class Category(db.Model):
 
 def AddItemSearchIndexes(item):
     
-    
+    return
+
     fields = [
        search.TextField(name='name', value=item.item_name),
        search.TextField(name='description', value=item.description)
@@ -20,7 +21,7 @@ def AddItemSearchIndexes(item):
 
     # Setting the doc_id is optional. If omitted, the search service will create an identifier.
     if item.category:
-        fields.append(search.TextField(name='category', value=cat))
+        fields.append(search.TextField(name='category', value=item.category.slug))
     if item.price:
         fields.append(search.NumberField(name='price', value=item.price))
 

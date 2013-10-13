@@ -12,103 +12,17 @@
     </div>
   </div>
 
-<div class = "row">
-  <div class="large-4 columns">
-  <ul class="pricing-table">
-  <li class="title">Bicycle</li>
-  <li class="description">I am selling my brand new bicycle because I just bought a car. It is $100 less than what I bought it for. Blue bike. 24 gears.</li>
-  <li class="cta-button"><a class="button" href="#">More Info</a></li>
-</ul>
-  </div>
+{% for item in items %}
+  
+  {% include "_item.html" with context %}
 
-<div class="small-1 columns">
-</div>
+{% else %}
 
-<div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Tricycle</li>
-    <li class="description">I am selling my brand new trike because I just bought a bike. It is $2. Yellow bike. No gears.</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>  
+  <h4>No items found :(</h4>
 
-<div class="small-1 columns">
-</div>
-
-<div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Unicycle</li>
-    <li class="description">I am selling my brand new Unicycle because I just bought a boat. It is $50 less than what I bought it for. Purple Bike.</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>
-
-<div class="small-1 columns">
-</div>
+{% endfor %}
 
 <div style="clear:both;"></div>
-
-<div class="large-4 columns">
-<ul class="pricing-table">
-  <li class="title">Motorcycle</li>
-  <li class="description">I am selling my brand new Motorcycle because I just bought a scooter. It is $1000 less than what I bought it for. Suzuki Bandit. Beautiful.</li>
-  <li class="cta-button"><a class="button" href="#">More Info</a></li>
-</ul>
-</div>
-<div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Quadracycle</li>
-    <li class="description">I am selling my brand new Quadracycle. It is $100 less than what I bought it for. Grey.</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>
-
-<div class="small-1 columns">
-</div><div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Pentacycle</li>
-    <li class="description">I am selling my brand new Pentacycle because I just bought a chair. It is $60 less than what I bought it for ($350).</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>
-
-<div class="small-1 columns">
-</div>
-<div style="clear:both;"></div>
-
-<div class="large-4 columns">
-<ul class="pricing-table">
-  <li class="title">Hexacycle</li>
-  <li class="description">Selling Hexacycle. Pm offer.</li>
-  <li class="cta-button"><a class="button" href="#">More Info</a></li>
-</ul>
-</div>
-<div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Road Bike</li>
-    <li class="description">Selling Road Bike. $150 or o/b</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>
-
-<div class="small-1 columns">
-</div><div class="large-4 columns">
-  <ul class="pricing-table">
-    <li class="title">Stolen Bike</li>
-    <li class="description">Selling a stolen bike. $2 o/b</li>
-    <li class="cta-button"><a class="button" href="#">More Info</a></li>
-  </ul>
-</div>
-
-<div class="small-1 columns">
-</div>
-
-<div style="clear:both;"></div>
-</div>
-</div>
-
-
-
 </div>
 
 {% endblock %}

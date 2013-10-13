@@ -129,6 +129,7 @@ class SellPage(BaseRequestHandler):
 
 class AddItemPage(BaseRequestHandler):
   def post(self):
+    logging.info(self.request)
     template_values = {}
     if not self.logged_in:
       self.redirect('/auth/facebook')
@@ -142,7 +143,7 @@ class AddItemPage(BaseRequestHandler):
         photo_url = self.request.get('file_url')
         new_item.photo_url = photo_url
       if (self.request.get('category') != 'CATEGORY'):
-        category = Category.all().filter('name=', self.request.get('category')).get()
+        category = Category.all().filter('name = ', self.request.get('category')).get()
         new_item.category = category
       if (self.request.get('price').isdigit() ):
         new_item.price = float(self.request.get('price'))
@@ -163,8 +164,9 @@ class BrowsePage(BaseRequestHandler):
       self.post()
 
   def post(self):
-      template_values = {'items':Item.all()}
-      self.render('items_list.html', template_values)
+    items = Item.all().fetch(limit=48)
+    template_values = {'items':items}
+    self.render('items_list.html', template_values)
        
 class SearchHandler(BaseRequestHandler):
 
