@@ -156,6 +156,7 @@ class AddItemPage(BaseRequestHandler):
 		  new_item.price =  float(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
+      template_values['item'] = new_item
       self.render('ItemView.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
