@@ -22,7 +22,7 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
    
-   function TestMessage() {
+   function postOnWall() {
 		FB.ui(
   {
     method: 'feed',
@@ -40,11 +40,19 @@
   }
 );
    }
+   
+   function sendMessage() {
+   FB.ui({
+  method: 'send',
+  link: 'http://www.nytimes.com/2011/06/15/arts/people-argue-just-to-win-scholars-assert.html',
+});
+}
 </script>
 
 Hello world!
 <p>
-<a onClick="TestMessage()">TEST THIS!</a>
-
+<a onClick="postOnWall()">Post on a Wall.</a>
+<p>
+<a onClick="sendMessage()">Send a message.</a>
 
 {% endblock %}
