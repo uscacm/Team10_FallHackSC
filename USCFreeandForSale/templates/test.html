@@ -1,14 +1,11 @@
 {% extends "_base.html" %}
 
 {% block content %}
-
-<div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
     // init the FB JS SDK
     FB.init({
-      appId      : 'YOUR_APP_ID',                        // App ID from the app dashboard
-      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel file for x-domain comms
+      appId      : '638088996223390',                      // App ID from the app dashboard
       status     : true,                                 // Check Facebook Login status
       xfbml      : true                                  // Look for social plugins on the page
     });
@@ -31,7 +28,6 @@
     method: 'feed',
     name: 'Facebook Dialogs',
     link: 'https://developers.facebook.com/docs/dialogs/',
-    picture: 'http://fbrell.com/f8.jpg',
     caption: 'Reference Documentation',
     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
   },
