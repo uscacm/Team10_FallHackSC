@@ -55,27 +55,15 @@ class BaseRequestHandler(webapp2.RequestHandler):
     """ Returns true if a user is currently logged in, false otherwise """
     return self.auth.get_user_by_session() is not None
   
-  # @webapp2.cached_property
-  # def category_list(self):
-  #   # categories = memcache.get('categories')
-  #   # if categories is not None:
-  #   #     return categories 
-  #   # else:
-  #     # all_categories = Category.all()
-  #     # if not memcache.set('categories', all_categories):
-  #     #   logging.error('Memcache set failed.')
-  #     # categories = memcache.get('categories')
-  #     # return all_categories
-
-  #   # categories = memcache.get('categories')
-  #   # if categories is not None:
-  #   #   categories = memcache.get('categories')
-  #   # else:
-  #   #   allCategories =  Category.all().order('sort')
-  #   #   memcache.set('categories', list(allCategories))
-  #   #   categories = memcache.get('categories')
-  #   # return categories
-
+  def category_list(self):
+    categories = memcache.get('categories')
+    if categories is not None:
+        return categories 
+    else:
+       categories = Category.all().order('sort')
+       if not memcache.set('categories', categories):
+         logging.error('Memcache set failed.')
+       return categories
       
   def render(self, template_name, template_vars={}):
     # Preset values for the template
@@ -83,7 +71,7 @@ class BaseRequestHandler(webapp2.RequestHandler):
       'url_for': self.uri_for,
       'logged_in': self.logged_in,
       'flashes': self.session.get_flashes(),
-      # 'categories': self.category_list()
+      'categories': self.category_list()
     }
     
     # Add manually supplied template values
@@ -178,7 +166,7 @@ class SearchHandler(BaseRequestHandler):
   def post(self):
     ###
     ### https://www.google.com/events/io/2011/sessions/full-text-search.html
-    ### NEed to insert items into the index when they get inserted into the db, update them aswell
+    ### Need to insert items into the index when they get inserted into the db, update them aswell
     ###
       if not self.request.get('q'):
         self.abort(404)
