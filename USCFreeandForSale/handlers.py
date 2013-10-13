@@ -139,7 +139,7 @@ class AddItemPage(BaseRequestHandler):
                       pickup_location=self.request.get('location'),
                       contact_method=self.request.get('contact'))
       if (self.request.get('category') != 'CATEGORY'):
-        category = Category.filter('name =', self.request.get('category')).get()
+        category = Category.all().filter('name =', self.request.get('category')).get()
         # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
         new_item.category = category;
       if (self.request.get('price').isdigit() ):
