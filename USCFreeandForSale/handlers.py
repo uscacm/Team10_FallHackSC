@@ -190,11 +190,12 @@ class BrowseCategoryPage(BaseRequestHandler):
     self.get()
 
   def get(self, cat_slug):
-      logging.error('k')
+      logging.error(cat_slug)
       category = Category.all().filter('slug = ', cat_slug).get()
       if not category:
         self.abort(404)
-        template_values = {category: category, items: category.items.all()}
+      else:
+        template_values = {'category': category, 'items': category.items}
         return self.render('category.html', template_values)
 
 class ItemPage(BaseRequestHandler):
