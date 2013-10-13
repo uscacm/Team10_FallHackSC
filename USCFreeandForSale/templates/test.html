@@ -26,10 +26,7 @@
 		FB.ui(
   {
     method: 'feed',
-    name: 'Facebook Dialogs',
-    link: 'https://developers.facebook.com/docs/dialogs/',
-    caption: 'Reference Documentation',
-    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+    name: 'Facebook Dialogs'
   },
   function(response) {
     if (response && response.post_id) {
@@ -43,8 +40,7 @@
    
    function sendMessage() {
    FB.ui({
-  method: 'send',
-  link: 'http://www.nytimes.com/2011/06/15/arts/people-argue-just-to-win-scholars-assert.html',
+  method: 'send'
 });
 }
 </script>
