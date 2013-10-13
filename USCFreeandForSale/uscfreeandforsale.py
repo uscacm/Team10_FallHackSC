@@ -1,63 +1,50 @@
 import os
 import urllib
 import webapp2
+from webapp2 import route
 import jinja2
+import handlers
+import secrets
+
+# inject './lib' dir in the path so that we can simply do "import ndb" 
+# or whatever there's in the app lib dir.
+if 'lib' not in sys.path:
+    sys.path[0:0] = ['lib']
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
   loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
   extensions = ['jinja2.ext.autoescape'])
 
 
-class MainPage(webapp2.RequestHandler):
-    def get(self): 
-        self.post()
-
-    def post(self):
-        template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('views/index.html')
-        self.response.write(template.render(template_values))
-
-
-class SellPage(webapp2.RequestHandler):
-    def get(self): 
-        self.post()
-
-    def post(self):
-        template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('views/newItem.html')
-        self.response.write(template.render(template_values))
-
-class BrowsePage(webapp2.RequestHandler):
-    def get(self): 
-        self.post()
-
-    def post(self):
-        template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('views/items_list.html')
-        self.response.write(template.render(template_values))
-
-class OneItemPage(webapp2.RequestHandler):
-    def get(self): 
-        self.post()
-
-    def post(self):
-        template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('views/Item_View.html')
-        self.response.write(template.render(template_values))
-
-class MyItemsPage(webapp2.RequestHandler):
-    def get(self): 
-        self.post()
-
-    def post(self):
-        template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('views/myItems.html')
-        self.response.write(template.render(template_values))
+# webapp2 config
+app_config = {
+  'webapp2_extras.sessions': {
+    'cookie_name': '_simpleauth_sess',
+    'secret_key': SESSION_KEY
+  },
+  'webapp2_extras.auth': {
+    'user_attributes': []
+  }
+}
 
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/sell', SellPage),
-    ('/browse', BrowsePage),
-    ('/item', OneItemPage),
-    ('/items', MyItemsPage)
-], debug=True)
+
+    # app routes
+    Route('/',               'handlers.MainPage',     name="home"),
+    Route('/sell',           'handlers.SellPage',     name="sell"),
+    Route('/browse',         'handlers.BrowsePage',   name="browse"),
+    Route('/item/<item_id>', 'handlers.ItemPage:one', name='item'),
+    Route('/items',          'handlers.ItemPage:all', name='items'),
+
+    # auth routes
+    Route('/profile',
+            handler='handlers.ProfileHandler',             name='profile'),
+    Route('/logout',
+            handler='handlers.AuthHandler:logout',         name='logout'),
+    Route('/auth/<provider>',
+            handler='handlers.AuthHandler:_simple_auth',   name='auth_login'),
+    Route('/auth/<provider>/callback', 
+            handler='handlers.AuthHandler:_auth_callback', name='auth_callback')
+
+], config=app_config, debug=True)
