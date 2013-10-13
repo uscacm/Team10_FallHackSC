@@ -90,7 +90,7 @@ class SellPage(BaseRequestHandler):
 
     def post(self):
         template_values = {}
-        if (!self.logged_in()):
+        if not self.logged_in:
           self.redirect('/auth/facebook')
         else:
           template_values['current_user'] = self.current_user
