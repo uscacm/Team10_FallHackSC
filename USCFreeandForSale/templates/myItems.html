@@ -68,7 +68,7 @@
 			  <li class=\"description\">Location: " + buyRequestItemsLocation[i] + "</li>\
 			</ul>\
 		  </div>\
-		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditBuyRequest" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
+		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditBuyRequest" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
 		</div>";
 	}
     
@@ -98,7 +98,7 @@
 			<fieldset>\
 			  <legend><h3>Edit Item</h3></legend>\
 			  <label><h4>Title</h4></label>\
-			  <input type=\"text\" placeholder=\"Title of your item\" value=\"" + pendingItemsTitle[indexOfID] + "\">\
+			  <input type=\"text\" id=\"titleEditor\" placeholder=\"Title of your item\" value=\"" + pendingItemsTitle[indexOfID] + "\">\
 			  <form class=\"custom\"><!--Form for a dropdown-->\
 				<label for=\"customDropdown\"><h4>Category</h4></label>\
 				<select id=\"customDropdown\">\
@@ -115,25 +115,86 @@
 				</select>\
 			  </form>\
 			  <label><h4>Description</h4></label>\
-			  <textarea placeholder=\"Description of your item\" style=\"width:100%; height:50px; resize:vertical;\">"  + pendingItemsDescription[indexOfID] + "</textarea>\
+			  <textarea placeholder=\"Description of your item\" id=\"descriptionEditor\" style=\"width:100%; height:50px; resize:vertical;\">"  + pendingItemsDescription[indexOfID] + "</textarea>\
 			  <label><h4>Photo</h4></label>\
 			  <input type=\"file\">\
 			  <label><h4>Location</h4></label>\
-			  <input type=\"text\" placeholder=\"Where to get your item\" value=\"" + pendingItemsLocation[indexOfID] + "\">\
+			  <input type=\"text\" placeholder=\"Where to get your item\" id=\"locationEditor\" value=\"" + pendingItemsLocation[indexOfID] + "\">\
 			  <label><h4>Contact Info</h4></label>\
 			  <input type=\"text\" placeholder=\"Email, phone, or anything else\">\
 			</fieldset>\
+			<button onClick=\"updateFields(currentID);\" class=\"button\">Submit Changes</button>\
 			<fieldset>\
 			  <legend><h2>Delete</h2></legend>\
 			  <label><h3>Are you sure you want to delete this item?</h3></label>\
 			  <div style=\"text-align:center; width:100%; margin:10px\">\
-				<button onClick=\"deleteItem(currentID\" class=\"button\">Yes</button><!--Fires the deleteItem function in the top script-->\
+				<button onClick=\"deleteItem(currentID)\" class=\"button\">Yes</button><!--Fires the deleteItem function in the top script-->\
 				<button onClick=\"closeModal('#editModal');\" class=\"button\">No</button>\
 			  </div>\
 			</fieldset>\
 		  </form>";
-      console.log(HTMLtoReturn);
 	  document.getElementById("editModalInner").innerHTML = HTMLtoReturn;
+	  } else if(idString.match("buttonEditBuyRequest") != null) {
+		var indexOfID = parseInt(idString.slice(20, idString.length));
+		var HTMLtoReturn = "\
+		  <form class=\"custom\"><!--Create a form-->\
+			<fieldset>\
+			  <legend><h3>Edit Item</h3></legend>\
+			  <label><h4>Title</h4></label>\
+			  <input type=\"text\" id=\"titleEditor\" placeholder=\"Title of your item\" value=\"" + buyRequestItemsTitle[indexOfID] + "\">\
+			  <form class=\"custom\"><!--Form for a dropdown-->\
+				<label for=\"customDropdown\"><h4>Category</h4></label>\
+				<select id=\"customDropdown\">\
+				  <option>Choose a category...</option>\
+				  <option>Appliances</option>\
+				  <option>Furniture</option>\
+				  <option>Clothing</option>\
+				  <option>Tickets</option>\
+				  <option>Books</option>\
+				  <option>Electronics</option>\
+				  <option>Transportation</option>\
+				  <option>Housing</option>\
+				  <option>Misc</option>\
+				</select>\
+			  </form>\
+			  <label><h4>Description</h4></label>\
+			  <textarea placeholder=\"Description of your item\" id=\"descriptionEditor\" style=\"width:100%; height:50px; resize:vertical;\">"  + buyRequestItemsDescription[indexOfID] + "</textarea>\
+			  <label><h4>Photo</h4></label>\
+			  <input type=\"file\">\
+			  <label><h4>Location</h4></label>\
+			  <input type=\"text\" id=\"locationEditor\" placeholder=\"Where to get your item\" value=\"" + buyRequestItemsLocation[indexOfID] + "\">\
+			  <label><h4>Contact Info</h4></label>\
+			  <input type=\"text\" placeholder=\"Email, phone, or anything else\">\
+			</fieldset>\
+			<button onClick=\"updateFields(currentID);\" class=\"button\">Submit Changes</button>\
+			<fieldset>\
+			  <legend><h2>Delete</h2></legend>\
+			  <label><h3>Are you sure you want to delete this item?</h3></label>\
+			  <div style=\"text-align:center; width:100%; margin:10px\">\
+				<button onClick=\"deleteItem(currentID)\" class=\"button\">Yes</button><!--Fires the deleteItem function in the top script-->\
+				<button onClick=\"closeModal('#editModal');\" class=\"button\">No</button>\
+			  </div>\
+			</fieldset>\
+		  </form>";
+	    document.getElementById("editModalInner").innerHTML = HTMLtoReturn;
+	  }
+	}
+	
+	function updateFields(idString) {
+	  if(idString.match("buttonEditPending") != null) {
+		var indexOfID = parseInt(idString.slice(17, idString.length));
+		pendingItemsTitle[indexOfID] = document.getElementById("titleEditor").value;
+		pendingItemsDescription[indexOfID] = document.getElementById("descriptionEditor").value;
+		pendingItemsLocation[indexOfID] = document.getElementById("locationEditor").value;
+		document.getElementById("pendingArea").innerHTML = updateItems(pendingItemsSize, pendingItemsArray);
+		closeModal('#editModal');
+	  } else if(idString.match("buttonEditBuyRequest") != null) {
+		var indexOfID = parseInt(idString.slice(20, idString.length));
+		buyRequestItemsTitle[indexOfID] = document.getElementById("titleEditor").value;
+		buyRequestItemsDescription[indexOfID] = document.getElementById("descriptionEditor").value;
+		buyRequestItemsLocation[indexOfID] = document.getElementById("locationEditor").value;
+		document.getElementById("buyRequestArea").innerHTML = updateItems(buyRequestItemsSize, buyRequestItemsArray);
+		closeModal('#editModal');
 	  }
 	}
 	
@@ -146,6 +207,31 @@
 	function updateItems(itemsSize, itemsArray) {
 	  var itemsHTML="";
 	  for(var i=0; i<itemsSize; i++) {
+		if((itemsArray[i] != "") && (itemsArray == pendingItemsArray)) {
+		  pendingItemsArray[i] = "\
+		  <div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
+			<div style=\"height:145px;\">\
+			  <ul class=\"pricing-table\">\
+				<li class=\"title\">" + pendingItemsTitle[i] + "</li>\
+				<li class=\"description\">Price: " + pendingItemsPrice[i] + "</li>\
+				<li class=\"description\">Location: " + pendingItemsLocation[i] + "</li>\
+			  </ul>\
+			</div>\
+			<div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
+		  </div>";
+		} else if((itemsArray[i] != "") && (itemsArray == buyRequestItemsArray)) {
+		  buyRequestItemsArray[i] = "\
+		  <div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
+			<div style=\"height:145px;\">\
+			  <ul class=\"pricing-table\">\
+				<li class=\"title\">" + buyRequestItemsTitle[i] + "</li>\
+				<li class=\"description\">Price: " + buyRequestItemsPrice[i] + "</li>\
+				<li class=\"description\">Location: " + buyRequestItemsLocation[i] + "</li>\
+			  </ul>\
+			</div>\
+			<div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditBuyRequest" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
+		  </div>";
+		}
 		itemsHTML+=itemsArray[i];
 	  }
 	  return itemsHTML;
