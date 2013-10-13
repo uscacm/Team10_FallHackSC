@@ -81,7 +81,8 @@ class BaseRequestHandler(webapp2.RequestHandler):
     try:
       self.response.write(self.jinja2.render_template(template_name, **values))
     except TemplateNotFound:
-      self.abort(404)
+      self.response.write('can\'t find yo template')
+      #self.abort(404)
 
   def head(self, *args):
     """Head is used by Twitter. If not there the tweet button shows 0"""
@@ -100,17 +101,17 @@ class MainPage(BaseRequestHandler):
 
 class AddCategory(BaseRequestHandler):
   def get(self):
-    return
-    Category(name='Appliances', slug='appliances', visible=True).put()
-    Category(name='Furniture', slug='furniture', visible=True).put()
-    Category(name='Clothing', slug='clothing', visible=True).put()
-    Category(name='Tickets', slug='tickets', visible=True).put()
-    Category(name='Books', slug='books', visible=True).put()
-    Category(name='Electronics', slug='electronics', visible=True).put()
-    Category(name='Transportation', slug='transportation', visible=True).put()
-    Category(name='Housing', slug='housing', visible=True).put()
-    Category(name='Misc', slug='misc', visible=True).put()
-      
+    if (Category.all().count() == 0):
+      Category(name='Appliances', slug='appliances', visible=True).put()
+      Category(name='Furniture', slug='furniture', visible=True).put()
+      Category(name='Clothing', slug='clothing', visible=True).put()
+      Category(name='Tickets', slug='tickets', visible=True).put()
+      Category(name='Books', slug='books', visible=True).put()
+      Category(name='Electronics', slug='electronics', visible=True).put()
+      Category(name='Transportation', slug='transportation', visible=True).put()
+      Category(name='Housing', slug='housing', visible=True).put()
+      Category(name='Misc', slug='misc', visible=True).put()
+        
 
 
 class SellPage(BaseRequestHandler):
@@ -185,19 +186,17 @@ class SearchHandler(BaseRequestHandler):
         logging.error('err!')
         self.abort(500)
 
-        
- 
-
-class BrowseCatPage(BaseRequestHandler):
-  def post(self, cat_page):
+class BrowseCategoryPage(BaseRequestHandler):
+  def post(self, cat_slug):
     self.get()
 
-  def get(self, cat_page):
-      category = Category.find_by_slug(cat_page)
+  def get(self, cat_slug):
+      logging.error('k')
+      category = Category.all().filter('slug = ', cat_slug).get()
       if not category:
         self.abort(404)
         template_values = {category: category, items: category.items.all()}
-        return template_values
+        return self.render('category.html', template_values)
 
 class ItemPage(BaseRequestHandler):
 
