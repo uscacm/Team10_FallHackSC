@@ -1,0 +1,32 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="items_list">
+  <div class="row">
+    <div class="large-8 columns">
+
+<h3 class="header"><span>Find stuff like {{category.name}}</span></h3>
+    </div>
+  </div>
+
+
+{% for item in items %}
+  
+  {% include "_item.html" with context %}
+
+{% else %}
+
+  <h4>No items found :(</h4>
+
+{% endfor %}
+
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+</div>
+
+{% endblock %}
