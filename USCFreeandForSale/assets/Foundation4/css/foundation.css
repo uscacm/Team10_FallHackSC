@@ -1076,7 +1076,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Corbel", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-style: normal;
-  color: #222222;
+ /* color: #222222; */
+  color: #d92800;
+/*  color: #ffcc00; */
   text-rendering: optimizeLegibility;
   margin-top: 0.2em;
   margin-bottom: 0.5em;
