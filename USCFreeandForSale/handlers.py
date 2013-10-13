@@ -95,7 +95,8 @@ class MainPage(BaseRequestHandler):
 
   def post(self):
       logging.info(self.request)
-      template_values = {}
+      recent_items = Item.all().order('created').fetch(limit=10)
+      template_values = {'recent_items':recent_items}
       self.render('index.html', template_values)
 
 
