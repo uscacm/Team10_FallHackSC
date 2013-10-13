@@ -167,7 +167,7 @@ class BrowsePage(BaseRequestHandler):
       self.post()
 
   def post(self):
-      template_values = {}
+      template_values = {'items':Item.all()}
       self.render('items_list.html', template_values)
        
 class SearchHandler(BaseRequestHandler):
