@@ -10,17 +10,24 @@ class Category(db.Model):
     slug = db.StringProperty(required=True)
     visible = db.BooleanProperty()
 
-def create_item(params):
-    #item
+def AddItemSearchIndexes(item):
+    
+    # Setting the doc_id is optional. If omitted, the search service will create an identifier.
+    if not item.category:
+        cat = None
+    else:
+        cat = item.category.slug
 
     new_search_document = search.Document(
-    # Setting the doc_id is optional. If omitted, the search service will create an identifier.
-    doc_id = item.key,
-    fields = [
-       search.TextField(name='title', value='Joe Jackson'),
-       search.TextField(name='description', value='thasdft'),
-       search.TextField(name='category', value='')
-    ])
+        doc_id = item.key,
+        fields = [
+           search.TextField(name='title', value=item.title),
+           search.TextField(name='description', value=item.description),
+           search.TextField(name='category', value=cat)
+        ]
+    )
+    new_search_document.put()
+
 
 class User(db.Model):
     fbid = db.StringProperty(required=True)

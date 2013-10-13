@@ -138,13 +138,16 @@ class AddItemPage(BaseRequestHandler):
                             data_source=0,
                             pickup_location=self.request.get('location'),
                             contact_method=self.request.get('contact'))
-      # if (self.request.get('category') != 'CATEGORY'):
-      #   categories = Category.all()
-      #   categories.filter('name ==', self.request.get('category'))
-      #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
-        # new_item.category = categories.fetch(1);
+
+      if (self.request.get('category') != 'CATEGORY'):
+        category = Category.all().filter('name=', self.request.get('category')).get()
+        new_item.category = category
+
+      # Can comment out if broken
+      AddItemSearchIndexes(new_item)
+
       if (self.request.get('price').isdigit() ):
-		    new_item.price =  float(self.request.get('price'))
+		    new_item.price = float(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
       template_values['item'] = new_item
