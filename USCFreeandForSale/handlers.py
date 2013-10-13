@@ -135,7 +135,8 @@ class AddItemPage(BaseRequestHandler):
     if not self.logged_in:
       self.redirect('/auth/facebook')
     else: 
-      new_item = Item(item_name=self.request.get('item_name'), 
+      new_item = Item(user=self.current_user.auth_ids[0],
+                      item_name=self.request.get('item_name'), 
                       description=self.request.get('description'), 
                       data_source=0,
                       pickup_location=self.request.get('location'),

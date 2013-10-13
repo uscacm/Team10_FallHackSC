@@ -31,7 +31,6 @@ def AddItemSearchIndexes(item):
     )
     new_search_document.put()
 
-
 class User(db.Model):
     fbid = db.StringProperty(required=True)
     first_name = db.StringProperty(required=True)
@@ -42,7 +41,7 @@ class User(db.Model):
     created = db.DateProperty(auto_now_add=True)
 
 class Item(db.Model):
-    user = db.ReferenceProperty(User, collection_name='items')
+    user = db.StringProperty(required=True)
     item_name = db.StringProperty(required=True)
     photo_url = db.StringProperty(required=False)
     category = db.ReferenceProperty(Category, collection_name='items')
