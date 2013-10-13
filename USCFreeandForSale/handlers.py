@@ -86,8 +86,7 @@ class SellPage(BaseRequestHandler):
 
     def post(self):
         template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('newItem.html')
-        self.response.write(template.render(template_values))
+        self.render('newItem.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
     def get(self): 
