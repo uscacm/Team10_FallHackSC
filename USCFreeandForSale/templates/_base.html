@@ -9,13 +9,20 @@
 	
 	<title>USC Free and For Sale</title>
 	
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="/assets/Foundation4/css/foundation.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/Foundation4/css/normalize.css" />
     <script src="/assets/Foundation4/assets/Foundation4/js/vendor/custom.modernizr.js"></script>
 
+=======
+	<!-- <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.min.css" /> -->
+	<link rel="stylesheet" type="text/css" href="assets/Foundation4/css/foundation.css" />
+    <link rel="stylesheet" type="text/css" href="assets/Foundation4/css/normalize.css" />
+    <script src="assets/Foundation4/assets/Foundation4/js/vendor/custom.modernizr.js"></script>
+>>>>>>> ab9b7800a65fae973571a4625b965bc931211d5f
 </head>
 
-<body>
+<body class="row">
 <div id="fb-root"></div>
 <!--Header-->
   <div class="row">
@@ -25,10 +32,9 @@
   </div>
   
 <!--Search Bar-->
-  <form>
-  <!-- <div class="row"> -->
+  <div class="row panel">
+  <form class ="custom">
 	<div class="large-2 columns" data-options="is_hover:true">
-		<form class="custom">
 		<select id="searchCat">
 		<option>All Categories</option>
 		<option>Appliances</option>
@@ -41,8 +47,8 @@
 		<option>Electronics</option>
 		<option>Transportation</option>
 		</select>
-    </div></form>
-	
+    </div>
+  
 	<div class="large-8 columns">
 		<input type="text" placeholder="Search"></input>
 	</div>
@@ -50,16 +56,19 @@
 	<div class="large-2 columns">
 		<a href="#" class="button prefix">Search</a>
 	</div>
-  <!-- </div> -->
   </form>
+  </div>
+
+ <div class="row"><p><p></div>			<!--Find a better way to do this!-->
 
 <!-- Navigation -->
   <div class="large-3 columns">
-	<div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+	<div class="nav-bar vertical">
 		<h4><a href="test">Test</a></h4>
+		<h4><a href="login">Log In!</a></h4>
 		<h4><a href="browse">Browse</a></h4>
 		<h4><a href="sell">Sell an Item</a></h4>
-		<h4><a href="items">My Items</a></h4>
+		<h4><a href="myitem">My Items</a></h4>
 		<h4>Categories</h4>
 		<div class="large-offset-1 columns">
 			<h4 class="title"><a href="#">Appliances</a></h4>
@@ -80,6 +89,12 @@
 	<div class="large-9 columns">
         {% block content %}{% endblock %}
 	</div>
+	
+	<!--Footer-->
+  <div class="row" style="height: 400px; position:absolute;">
+  	&nbsp;
+  </div>
+
 
   <!-- Javascript -->
   <script>

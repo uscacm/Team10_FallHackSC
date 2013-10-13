@@ -22,29 +22,27 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
    
-   function TestMessage() {
+   function postOnWall() {
 		FB.ui(
-  {
-    method: 'feed',
-    name: 'Facebook Dialogs',
-    link: 'https://developers.facebook.com/docs/dialogs/',
-    caption: 'Reference Documentation',
-    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
-  },
-  function(response) {
-    if (response && response.post_id) {
-      alert('Post was published.');
-    } else {
-      alert('Post was not published.');
-    }
+      {
+        method: 'feed',
+        name: 'Facebook Dialogs'
+      },
+      function(response) {
+        if (response && response.post_id) {
+          alert('Post was published.');
+        } else {
+          alert('Post was not published.');
+        }
+      }
+    );
   }
-);
-}
 </script>
 
 Hello world!
 <p>
-<a onClick="TestMessage()">TEST THIS!</a>
-
+<a onClick="postOnWall()">Post on a Wall.</a>
+<p>
+<a onClick="sendMessage()">Send a message.</a>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Everything above is for compatibility with _base.html -->
 <!-- Item name and line -->
-<div class="row">
+	<div class="row">
 			<h2>Item Name</h2>
 			<hr />
 	</div>
@@ -15,7 +15,8 @@
 			</div>
 			<div class="row">
 				<div class="panel">
-					<p>This is where the photo goes.<br />I need to check how to include photos.</p>
+					<p>This is where the photo goes; insert crappy picture below.</p>
+					<img src="http://www.trojanclubofsandiego.com/images/site_elements/university_southern_california_athletics_fight_on.jpg" />
 				</div>
 			</div>
 			<div class="row">
@@ -78,25 +79,24 @@
 		<h3>Input your personal information:</h3>
 		<hr />
 	</div>
-	<div class="row">
-		<label>Name</label>
-        <input type="text" placeholder="Your Name (e.g. John Smith)">
-	</div>
-	<div class="row">
-		<label>Contact Information</label>
-        <input type="text" placeholder="Your Number (e.g. 213-740-4321)">
-	</div>
-	<!-- Opens a confirmation modal that confirms clearing -->
-	<div class="row">
-		<a href="#" data-reveal-id="submitModal" class="success button">Submit</a>
-	</div>
+	<form data-abide><fieldset>
+		<legend>Personal Information</legend>
+		<div class="row">
+			<label for="name">Name</label>
+			<input id="name" placeholder="Your Name (e.g. John Smith)" type="text" required pattern="[a-zA-Z]+">
+			 <small class="error">Name is required and must be a string.</small>
+		</div>
+		<div class="row">
+			<label for="phone">Phone Number</label>
+			<input type="tel" required id="phone" placeholder="1 234-567-8910">
+			<small class="error" data-error-message>Please enter a properly formatted telephone number.</small>
+		</div>
+		<div class="row">
+			<button type = "submit">Submit</button>
+		</div>
+	</fieldset></form>
+	
 	<a class="close-reveal-modal">&#215;</a>
-</div>
-
-<!-- submitModal -->
- <div id="submitModal" class="reveal-modal">
-	<h3>Submit successful!</h3>
-	<a class="close-reveal-modal" class="success button">Close</a>
 </div>
 
 <!-- Scripts gotten from http://foundation.zurb.com/docs/ -->
@@ -106,6 +106,7 @@
   '.js><\/script>')
  </script>
   <script src="js/foundation/foundation.js"></script>
+  <script src="js/foundation/foundation.abide.js"></script>
   <script src="js/foundation/foundation.reveal.js"></script>
   <script>
     $(document).foundation();

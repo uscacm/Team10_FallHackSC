@@ -90,9 +90,11 @@ class SellPage(BaseRequestHandler):
 
     def post(self):
         template_values = {}
-        if (self.current_user):
+        if (!self.logged_in()):
+          self.redirect('/auth/facebook')
+        else:
           template_values['current_user'] = self.current_user
-        self.render('newItem.html', template_values)
+          self.render('newItem.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
 
