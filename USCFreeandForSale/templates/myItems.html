@@ -35,7 +35,7 @@
 	  pendingItemsDescription[i] = "Description of pending item. This'll be quite a bit longer it is now."
 	  pendingItemsLocation[i] = "My Location " + i;
 	  pendingItemsArray[i] = "\
-		<div class=\"item_Box\" id=\"item_Box_Edit_" + i + "\">\
+		<div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
 		  <div style=\"height:145px;\">\
 			<ul class=\"pricing-table\">\
 			  <li class=\"title\">" + pendingItemsTitle[i] + "</li>\
@@ -43,30 +43,33 @@
 			  <li class=\"description\">Location: " + pendingItemsLocation[i] + "</li>\
 			</ul>\
 		  </div>\
-		  <li class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></li>\
+		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
 		</div>";
 	}
 	
 	<!--Setup for buyRequest section-->
 	var buyRequestItemsArray = new Array(); <!--Holds HTML for each buyRequestItem-->
+	var buyRequestItemsTitle = new Array();
+	var buyRequestItemsPrice = new Array();
+	var buyRequestItemsDescription = new Array();
+	var buyRequestItemsLocation = new Array();
 	var buyRequestItemsSize = 5;
 	for(var i=0; i<buyRequestItemsSize; i++) { <!--Assigns HTML to each buyRequestItem-->
+	  buyRequestItemsTitle[i] = "Item Title " + i;
+	  buyRequestItemsPrice[i] = i*4.99;
+	  buyRequestItemsDescription[i] = "Description of pending item. This'll be quite a bit longer it is now."
+	  buyRequestItemsLocation[i] = "My Location " + i;
 	  buyRequestItemsArray[i] = "\
-		<div class=\"item_Box\" id=\"item_Box_Edit\">\
-		  <div style=\"height:150px;\">\
+	    <div class=\"item_Box\" id=\"item_Box_BuyReqeust_" + i + "\">\
+		  <div style=\"height:145px;\">\
 			<ul class=\"pricing-table\">\
-			  <li class=\"title\">Title Of Item " + i + "</li>\
-			  <li class=\"description\"></li>\
-			  <li class=\"description\"></li>\
-			  <li class=\"description\"></li>\
-			  <li class=\"cta-button\"><a class=\"button\" href=\"#\">Edit Item</a></li>\
+			  <li class=\"title\">" + buyRequestItemsTitle[i] + "</li>\
+			  <li class=\"description\">Price: " + buyRequestItemsPrice[i] + "</li>\
+			  <li class=\"description\">Location: " + buyRequestItemsLocation[i] + "</li>\
 			</ul>\
 		  </div>\
-		  <p>Location: Location of Item</p>\
-		  <p>Description of Item</p>\
-		  <input name=\"Edit Item\" type=\"button\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" value=\"Edit Item\" id=\"buttonEditBuyRequest" + i + "\" style=\"x:0; y:0;\"/>\
-		  <input name=\"Delete Item\" type=\"button\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"deleteModal\" value=\"Delete Item\" id=\"buttonDeleteBuyRequest" + i + "\"/>\
-		</div>"
+		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditBuyRequest" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
+		</div>";
 	}
     
     <!--Holds an ID's value. Needed for deleteItem since deleting somethings takes two button presses-->
@@ -77,14 +80,14 @@
     
 	<!--Deletes the item given by its id-->
     function deleteItem(idString) {
-	  if(idString.match("buttonDeleteBuyRequest") != null) { <!--If idString is buyRequest type-->
-	    buyRequestItemsArray[parseInt(idString.slice(22, idString.length))] = ""; <!--Remove it from the array, but keep its position in the array since it's easier to update the front end that way-->
+	  if(idString.match("buttonEditBuyRequest") != null) { <!--If idString is buyRequest type-->
+	    buyRequestItemsArray[parseInt(idString.slice(20, idString.length))] = ""; <!--Remove it from the array, but keep its position in the array since it's easier to update the front end that way-->
 		document.getElementById("buyRequestArea").innerHTML = updateItems(buyRequestItemsSize, buyRequestItemsArray); <!--Update the buyRequestArea-->
-		closeModal('#deleteModal'); <!--Close the delete modal-->
-	  } else if(idString.match("buttonDeletePending") != null) {
-		pendingItemsArray[parseInt(idString.slice(19, idString.length))] = "";
+		closeModal('#editModal'); <!--Close the delete modal-->
+	  } else if(idString.match("buttonEditPending") != null) {
+		pendingItemsArray[parseInt(idString.slice(17, idString.length))] = "";
 		document.getElementById("pendingArea").innerHTML = updateItems(pendingItemsSize, pendingItemsArray);
-		closeModal('#deleteModal');
+		closeModal('#editModal');
 	  }
 	}
 	
@@ -153,25 +156,18 @@
         <label><h4>Contact Info</h4></label>
         <input type="text" placeholder="Email, phone, or anything else">
       </fieldset>
-    <form>
+      <fieldset>
+        <legend><h2>Delete</h2></legend>
+        <label><h3>Are you sure you want to delete this item?</h3></label>
+        <div style="text-align:center; width:100%; margin:10px">
+          <button onClick="deleteItem(currentID)" class="button">Yes</button><!--Fires the deleteItem function in the top script-->
+          <button onClick="closeModal('#editModal');" class="button">No</button>
+        </div>
+      </fieldset>
+    </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
-  <!--Modal to delete an item-->
-  <div id="deleteModal" class="reveal-modal">
-  	<form class="custom">
-      <fieldset>
-        <legend><h2>Delete Confirmation</h2></legend>
-        <label><h3>Are you sure you want to delete this item?</h3></label>
-        <div style="text-align:center; width:100%; margin:10px">
-          <button onClick="deleteItem(currentID)" class="button">Yes</a></button><!--Fires the deleteItem function in the top script-->
-          <button onClick="closeModal('#deleteModal');" class="button">No</a>
-        </div>
-      </fieldset>
-    <form>
-    <a class="close-reveal-modal">&#215;</a>
-  </div>
-  	
   <script>
     <!--Renders stuff the first time around-->
 	document.getElementById("pendingArea").innerHTML = updateItems(pendingItemsSize, pendingItemsArray);
