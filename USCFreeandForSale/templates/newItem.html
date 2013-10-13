@@ -1,0 +1,133 @@
+{% extends "views/_base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<body>
+
+<div class="row">
+
+ <!-- Nav Sidebar -->
+<!-- Main Section to Sell-->
+ 
+ 
+<font size=6 ><b>Sell Item</b></font><br><hr><br>
+	
+	<div class = "panels">
+		<div class = "large-6 columns">
+		<!-- Content for the sell area -->
+		<div id = "sellContent">
+			<!-- Item row -->
+			<div class="row">
+				<div class="large-5 columns">
+					<h6 class="title"> Item: </h6>
+				</div>
+				<div class="large-6 columns">
+						<form>
+						<input type="text"  placeholder="New Item">
+						</form>
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-1 columns"></div>
+			</div>
+			
+			<!-- Photo area -->
+			<div class = "row">
+				<div class="large-5 columns">
+					<h6 class="title"> Photo: </h6>
+				</div>
+				<div class="large-6 columns">
+					<form>
+					<input type="file" id="photo" name="photofile" size="40">
+					</form>
+				</div>
+				<!-- empty div -->
+				<div class="large-1 columns"></div>
+			</div>
+			
+			<!-- Category section -->
+			<div class="row">
+				<div class="large-5 columns">
+					<h6> Category: </h6>
+				</div>
+				<div class="large-6 columns">
+				<form class="custom">
+					
+					<select id="customDropdown">
+						<option value="Appliances">Appliances</option>
+						<option value="Books">Books</option>
+						<option value="Clothing">Clothing</option>
+						<option value="Electronics">Electronics</option>
+						<option value="Furniture">Furniture</option>
+						<option value="Housing">Housing</option>
+						<option value="Tickets">Tickets</option>
+						<option value="Transportation">Transportation</option>
+						<option value="Vehicle">Vehicle</option>
+						<option value="Misc">Misc</option>
+					</select>
+					
+					</form>
+				</div>
+				<!-- empty div to fill up space -->
+				<div class="large-1 columns"></div>
+			</div>
+				
+			<!-- Description area -->	
+			<div class = "row">
+				<div class="large-5 columns">
+					<h6 class="title"> Description: </h6>
+				</div>
+				<div class="large-6 columns">
+					<form>
+						<textarea name="item" rows="5" cols="60" placeholder="Description"></textArea>
+					</form>
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-1 columns"></div>
+			</div>
+			
+			<!-- Location stuff -->
+			<div class = "row">
+				<div class="large-5 columns">
+					<h6 class="title"> Location: </h6>
+				</div>
+				<div class="large-6 columns">
+					<form>
+					<input type="text" name="location">
+					</form>
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-1 columns"></div>
+			</div>
+				
+			<!-- how to contact -->
+			<div class = "row">
+				<div class="large-5 columns">
+				<h6 class="title"> Your Contact Info: </h6>
+				</div>
+				<div class="large-6 columns">
+					<form>
+					<input type="text" name="location">
+					</form>
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-1 columns"></div>
+			</div>
+				
+			<br><input type="submit" value="Create"><br>			
+		</div>
+		</div>
+		
+		<!--File Photo-->
+		<div class = "large-6 columns"></div>
+	</div>
+
+</div>
+	
+	<br><br><br><br><br><br>
+
+
+{% endblock %}
