@@ -1054,7 +1054,7 @@ a {
   text-decoration: none;
   line-height: inherit; }
   a:hover, a:focus {
-    color: #2795b6; }
+    color: #ffcc00; }
   a img {
     border: none; }
 
@@ -1336,10 +1336,10 @@ button, .button {
   padding-left: 1.5em;
   font-size: 1em;
   background-color: #d40e01;
-  border-color: #2284a1;
+  border-color: #ffcc00;
   color: white; }
   button:hover, button:focus, .button:hover, .button:focus {
-    background-color: #2284a1; }
+    background-color: #ffcc00; }
   button:hover, button:focus, .button:hover, .button:focus {
     color: white; }
   button.secondary, .button.secondary {
@@ -1396,14 +1396,14 @@ button, .button {
     padding-right: 0.75em; }
   button.disabled, button[disabled], .button.disabled, .button[disabled] {
     background-color: #d40e01;
-    border-color: #2284a1;
+    border-color: #ffcc00;
     color: white;
     cursor: default;
     opacity: 0.6;
     -webkit-box-shadow: none;
     box-shadow: none; }
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-      background-color: #2284a1; }
+      background-color: #ffcc00; }
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       color: white; }
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
@@ -2961,7 +2961,7 @@ label.error {
       padding-right: 15px;
       padding-left: 15px; }
       .top-bar-section ul li > a.button:hover {
-        background: #2284a1; }
+        background: #ffcc00; }
     .top-bar-section ul li > a.button.secondary {
       background: #e9e9e9; }
       .top-bar-section ul li > a.button.secondary:hover {
@@ -3778,7 +3778,7 @@ label.error {
   padding: 0.6875em 1.3125em 0.75em 0.6875em;
   font-size: 0.875em;
   background-color: #d40e01;
-  border-color: #2284a1;
+  border-color: #ffcc00;
   color: white; }
   .alert-box .close {
     font-size: 1.375em;
@@ -4181,7 +4181,7 @@ ul.pagination {
   .panel.callout {
     border-style: solid;
     border-width: 1px;
-    border-color: #2284a1;
+    border-color: #ffcc00;
     margin-bottom: 1.25em;
     padding: 1.25em;
     background: #d40e01;
