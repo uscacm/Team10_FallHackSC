@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Foundation 4</title>
+  
+  <link rel="stylesheet" href="css/foundation.css" />
+
+  <script type="text/javascript" src="js/vendor/custom.modernizr.js"></script>
+  <style>
+	.item_Box {
+	  width:200px;
+	  height:200px;
+	  padding:2px;
+	  border:1px solid black;
+	  display:inline-block;
+	  white-space:normal;
+	}
+	.scroll_Area {
+		height:220px;
+		overflow-x:auto;
+		white-space:nowrap;
+		padding-left:11px;
+		padding-right:7px;
+		display:block;
+	}
+  </style>
+</head>
+
+<body>
+  <div id="my_Items_Title">
+  <h2>My Items</h2>
+  
+  <h3>Pending</h3>
+  <hr />
+  <div class="scroll_Area">
+    <ul class="small-block-grid-2">
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+      </div>
+    </ul>
+  </div>
+  
+  <h3>Buy Requests</h3>
+  <hr />
+  <div class="scroll_Area">
+    <ul class="small-block-grid-2">
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" value="Delete Item" />
+      </div>
+      <div class="item_Box" id="item_Box_Edit">
+        <h3>Title Of Item</h3>
+        <p>Location: Location of Item</p>
+        <p>Description of Item</p>
+        <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
+        <input name="Delete Item" type="button" value="Delete Item" />
+      </div>
+    </ul>
+  </div>
+  
+  <div id="editModal" class="reveal-modal">
+  	<form class="custom">
+      <fieldset>
+        <legend><h3>Edit Item</h3></legend>
+        <label><h4>Title</h4></label>
+        <input type="text" placeholder="Title of your item">
+        <label><h4>Category</h4></label>
+        <div class="custom dropdown">
+          <label for="customDropdown">Category</label>
+          <select id="customDropdown">
+            <option DISABLED>Choose a category...</option>
+            <option>Appliances</option>
+            <option>Furniture</option>
+            <option>Clothing</option>
+            <option>Tickets</option>
+            <option>Books</option>
+            <option>Electronics</option>
+            <option>Transportation</option>
+            <option>Housing</option>
+            <option>Misc</option>
+          </select>
+        </div>
+        <label><h4>Description</h4></label>
+        <input type="textarea" placeholder="Description of your item" class="error" />
+        <small class="error">Invalid entry</small>
+        <label><h4>Photo</h4></label>
+        <input type="text" placeholder="Upload a photo of your item">
+        <label><h4>Location</h4></label>
+        <input type="text" placeholder="Where to get your item">
+        <label><h4>Contact Info</h4></label>
+        <input type="text" placeholder="Email, phone, or anything else">
+      </fieldset>
+    <form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+<script>
+	document.write('<script src=' +
+	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+	'.js><\/script>')
+  </script>
+  <script src="js/foundation/foundation.js"></script>
+  <script src="js/foundation/foundation.section.js"></script>
+  <script src="js/foundation/foundation.reveal.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+  
+</body>
+</html>
