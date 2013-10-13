@@ -152,8 +152,8 @@ class AddItemPage(BaseRequestHandler):
       #   category = categories.filter('name=', self.request.get('category'))
       #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
       #   new_item.category = category;
-      if (self.request.get('price')):
-        new_item.price =  float(self.request.get('price'))
+      if (self.request.get('price').isdigit() ):
+		  new_item.price =  float(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
       self.render('ItemView.html', template_values)
