@@ -4,7 +4,7 @@
 <!-- Everything above is for compatibility with _base.html -->
 <!-- Item name and line -->
 	<div class="row">
-			<h2>Item Name</h2>
+			<h2>{{item.item_name}}</h2>
 			<hr />
 	</div>
 	<div class="row">
@@ -15,8 +15,7 @@
 			</div>
 			<div class="row">
 				<div class="panel">
-					<p>This is where the photo goes; insert crappy picture below.</p>
-					<img src="http://www.trojanclubofsandiego.com/images/site_elements/university_southern_california_athletics_fight_on.jpg" />
+					<img src="{{item.photo_url}}" />
 				</div>
 			</div>
 			<div class="row">
@@ -24,7 +23,7 @@
 			</div>
 			<div class="row">
 				<div class="panel">
-					<p>This is where the category goes.<br />I imagine we will actually be using a string or something.</p>
+					<p>{{item.category}}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -32,7 +31,7 @@
 			</div>
 			<div class="row">
 				<div class="panel">
-					<p>This is where the description goes.<br />I imagine we will actually be using a string or something.</p>
+					<p>{{item.description}}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -40,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="panel">
-					<p>This is where the price goes.<br />I imagine we will actually be using a string or something.</p>
+					<p>{{item.price}}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -52,7 +51,7 @@
 				</div>
 				<div class = "large-10 columns">
 					<div class="panel">
-						<p>213-740-4321 (Should take string)</p>
+						<p>CONTACT INFO</p>
 					</div>
 				</div>	
 			</div>
@@ -62,7 +61,7 @@
 				</div>
 				<div class = "large-10 columns">
 					<div class="panel">
-						<p>Leavey Fountain (Should take string)</p>
+						<p>LOCATION</p>
 					</div>
 				</div>	
 			</div>
