@@ -7,6 +7,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <body>
+<!-- javascript to view image -->
+<!-- javascript to view image -->
 
 <div class="row">
 
@@ -16,7 +18,7 @@
  
 <font size=6 ><b>Sell Item</b></font><br><hr><br>
 	
-	<div class = "panels">
+	<form data-abide>
 		<div class = "large-11 columns">
 		<!-- Content for the sell area -->
 		<div id = "sellContent">
@@ -26,15 +28,17 @@
 					<h6 class="title"> Item: </h6>
 				</div>
 				<div class="large-6 columns">
-						<form data-abide>
-						<input type="text"  placeholder="New Item">
-						</form>
+						
+							<div class="name-field">
+							<input type="text" placeholder="New Item" required>
+							</div>
+						
 				</div>
 				<!-- Empty div for spacing -->
 				<div class="large-6 columns"></div>
 			</div>
 			
-			
+			<br>
 			
 			<!-- Category section -->
 			<div class="row">
@@ -62,21 +66,22 @@
 				<!-- empty div to fill up space -->
 				<div class="large-1 columns"></div>
 			</div>
-				
+				<br>
 			<!-- Photo area -->
 			<div class = "row">
 				<div class="large-5 columns">
 					<h6 class="title"> Photo: </h6>
 				</div>
 				<div class="large-6 columns">
-					<form>
-					<button type="file" id="photo" name="photofile" size="40">Upload</button>
-					</form>
+					
+					<input type="file" id="imgInp" size="40" accept="image/*" />
+					
+					
 				</div>
 				<!-- empty div -->
 				<div class="large-1 columns"></div>
-			</div>	
-				
+			</div>
+				<br>
 				
 			<!-- Description area -->	
 			<div class = "row">
@@ -84,23 +89,23 @@
 					<h6 class="title"> Description: </h6>
 				</div>
 				<div class="large-6 columns">
-					<form>
-						<textarea name="item" rows="5" cols="60" placeholder="Description"></textArea>
-					</form>
+					
+						<textarea name="item" rows="5" cols="60" placeholder="Description" required></textArea>
+					
 				</div>
 				<!-- Empty div for spacing -->
 				<div class="large-1 columns"></div>
 			</div>
-			
+			<br>
 			<!-- Location stuff -->
 			<div class = "row">
 				<div class="large-5 columns">
 					<h6 class="title"> Location: </h6>
 				</div>
 				<div class="large-6 columns">
-					<form>
-					<input type="text" name="location" placeholder="Location">
-					</form>
+					
+					<input type="text" name="location" placeholder="Location" required>
+					
 				</div>
 				<!-- Empty div for spacing -->
 				<div class="large-1 columns"></div>
@@ -112,9 +117,9 @@
 				<h6 class="title"> Your Contact Info: </h6>
 				</div>
 				<div class="large-6 columns">
-					<form>
-					<input type="text" name="location" placeholder="Best Way To Contact You">
-					</form>
+					
+					<input type="text" name="location" placeholder="Best Way To Contact You" required>
+					
 				</div>
 				<!-- Empty div for spacing -->
 				<div class="large-1 columns"></div>
@@ -126,7 +131,7 @@
 		
 		<!--File Photo-->
 		<div class = "large-1 columns"></div>
-	</div>
+	</form>
 
 </div>
 	
