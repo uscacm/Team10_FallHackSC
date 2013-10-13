@@ -137,23 +137,20 @@ class AddItemPage(BaseRequestHandler):
                             description=self.request.get('description'), 
                             data_source=0,
                             pickup_location=self.request.get('location'),
-<<<<<<< HEAD
                             contact_method=self.request.get('contact'),
+                            photo_url = self.request.get('file_url'))
 							
-							photo_url = self.request.get('file_url'))
+							
       # if (self.request.get('category') != 'CATEGORY'):
       #   categories = Category.all()
       #   categories.filter('name ==', self.request.get('category'))
       #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
         # new_item.category = categories.fetch(1);
-=======
-                            contact_method=self.request.get('contact'))
 
       if (self.request.get('category') != 'CATEGORY'):
         category = Category.all().filter('name=', self.request.get('category')).get()
         new_item.category = category
 
->>>>>>> 8547897b03d39c061ce1ff86df1d28286d40289b
       if (self.request.get('price').isdigit() ):
 		    new_item.price = float(self.request.get('price'))
 
