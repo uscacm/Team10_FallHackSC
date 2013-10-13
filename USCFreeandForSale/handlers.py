@@ -132,16 +132,16 @@ class AddItemPage(BaseRequestHandler):
     if not self.logged_in:
       self.redirect('/auth/facebook')
     else: 
-      new_item = Item(item_name=self.request.get('item_name'), 
-                            description=self.request.get('description'), 
-                            data_source=0,
-                            pickup_location=self.request.get('location'),
-                            contact_method=self.request.get('contact'))
-      # if (self.request.get('category') != 'CATEGORY'):
-      #   categories = Category.all()
-      #   categories.filter('name ==', self.request.get('category'))
-      #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
-        # new_item.category = categories.fetch(1);
+      new_item = Item(user=self.current_user,
+                      item_name=self.request.get('item_name'), 
+                      description=self.request.get('description'), 
+                      data_source=0,
+                      pickup_location=self.request.get('location'),
+                      contact_method=self.request.get('contact'))
+      if (self.request.get('category') != 'CATEGORY'):
+        category = Category.filter('name =', self.request.get('category')).get()
+        # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
+        new_item.category = category;
       if (self.request.get('price').isdigit() ):
 		    new_item.price =  float(self.request.get('price'))
       new_item.put()
