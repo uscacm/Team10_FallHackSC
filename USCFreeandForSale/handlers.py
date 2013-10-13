@@ -98,7 +98,7 @@ class MainPage(BaseRequestHandler):
       recent_items = Item.all().order('-created').fetch(limit=10)
       popular_items = Item.all().order('created').fetch(limit=10)
       template_values = {'recent_items':recent_items,
-                         'popular_item':popular_items}
+                         'popular_items':popular_items}
       self.render('index.html', template_values)
 
 
