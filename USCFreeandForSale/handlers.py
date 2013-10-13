@@ -8,6 +8,7 @@ from google.appengine.api import search
 import facebook
 import json
 from google.appengine.api import memcache
+from google.appengine.ext import db
 
 from webapp2_extras import auth, sessions, jinja2
 from jinja2.runtime import TemplateNotFound
@@ -54,16 +55,27 @@ class BaseRequestHandler(webapp2.RequestHandler):
     """ Returns true if a user is currently logged in, false otherwise """
     return self.auth.get_user_by_session() is not None
   
-  @webapp2.cached_property
-  def category_list(self):
-    categories = memcache.get('categories')
-    if categories is not None:
-        return categories 
-    else:
-        categories = Category.all().sort('sort,name')
-        if not memcache.add('categories', categories):
-            logging.error('Memcache set failed.')
-        return categories
+  # @webapp2.cached_property
+  # def category_list(self):
+  #   # categories = memcache.get('categories')
+  #   # if categories is not None:
+  #   #     return categories 
+  #   # else:
+  #     # all_categories = Category.all()
+  #     # if not memcache.set('categories', all_categories):
+  #     #   logging.error('Memcache set failed.')
+  #     # categories = memcache.get('categories')
+  #     # return all_categories
+
+  #   # categories = memcache.get('categories')
+  #   # if categories is not None:
+  #   #   categories = memcache.get('categories')
+  #   # else:
+  #   #   allCategories =  Category.all().order('sort')
+  #   #   memcache.set('categories', list(allCategories))
+  #   #   categories = memcache.get('categories')
+  #   # return categories
+
       
   def render(self, template_name, template_vars={}):
     # Preset values for the template
@@ -71,7 +83,7 @@ class BaseRequestHandler(webapp2.RequestHandler):
       'url_for': self.uri_for,
       'logged_in': self.logged_in,
       'flashes': self.session.get_flashes(),
-      'categories': self.category_list()
+      # 'categories': self.category_list()
     }
     
     # Add manually supplied template values
@@ -89,29 +101,27 @@ class BaseRequestHandler(webapp2.RequestHandler):
 
 
 class MainPage(BaseRequestHandler):
+  def get(self): 
+      self.post()
 
-    def get(self): 
-        self.post()
-
-    def post(self):
-        logging.info(self.request)
-        template_values = {}
-        self.render('index.html', template_values)
+  def post(self):
+      logging.info(self.request)
+      template_values = {}
+      self.render('index.html', template_values)
 
 
 class AddCategory(BaseRequestHandler):
-    def get(self):
-
-      return
-      Category(name='Appliances', slug='appliances', visible=True).put()
-      Category(name='Furniture', slug='furniture', visible=True).put()
-      Category(name='Clothing', slug='clothing', visible=True).put()
-      Category(name='Tickets', slug='tickets', visible=True).put()
-      Category(name='Books', slug='books', visible=True).put()
-      Category(name='Electronics', slug='electronics', visible=True).put()
-      Category(name='Transportation', slug='transportation', visible=True).put()
-      Category(name='Housing', slug='housing', visible=True).put()
-      Category(name='Misc', slug='misc', visible=True).put()
+  def get(self):
+    return
+    Category(name='Appliances', slug='appliances', visible=True).put()
+    Category(name='Furniture', slug='furniture', visible=True).put()
+    Category(name='Clothing', slug='clothing', visible=True).put()
+    Category(name='Tickets', slug='tickets', visible=True).put()
+    Category(name='Books', slug='books', visible=True).put()
+    Category(name='Electronics', slug='electronics', visible=True).put()
+    Category(name='Transportation', slug='transportation', visible=True).put()
+    Category(name='Housing', slug='housing', visible=True).put()
+    Category(name='Misc', slug='misc', visible=True).put()
       
 
 
@@ -142,80 +152,80 @@ class AddItemPage(BaseRequestHandler):
       #   category = categories.filter('name=', self.request.get('category'))
       #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
       #   new_item.category = category;
-      # if (self.request.get('price')):
-      #   new_item.price =  Decimal(self.request.get('price'))
+      if (self.request.get('price')):
+        new_item.price =  float(self.request.get('price'))
       new_item.put()
       template_values['current_user'] = self.current_user
       self.render('ItemView.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
 
-    def get(self): 
-        self.post()
+  def get(self): 
+      self.post()
 
-    def post(self):
-        template_values = {}
-        self.render('items_list.html', template_values)
+  def post(self):
+      template_values = {}
+      self.render('items_list.html', template_values)
        
 class SearchHandler(BaseRequestHandler):
 
-    def get(self): 
-        self.post()
+  def get(self): 
+      self.post()
 
-    def post(self):
-      ###
-      ### https://www.google.com/events/io/2011/sessions/full-text-search.html
-      ### NEed to insert items into the index when they get inserted into the db, update them aswell
-      ###
-        if not self.request.get('q'):
-          self.abort(404)
-          return
+  def post(self):
+    ###
+    ### https://www.google.com/events/io/2011/sessions/full-text-search.html
+    ### NEed to insert items into the index when they get inserted into the db, update them aswell
+    ###
+      if not self.request.get('q'):
+        self.abort(404)
+        return
 
-        try:
-          items_index = search.Index(name='items_search')
-          if self.request.get('cat'):
-            search_results = index.search('title:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
-          else:
-            search_results = index.search('title:"' + query + '" AND desc:"' + query + '"')
-          template_values = {results: search_results}
-          self.render('search_results.html', template_values)
-          return
-        except search.Error:
-          logging.error('err!')
-          self.abort(500)
+      try:
+        items_index = search.Index(name='items_search')
+        if self.request.get('cat'):
+          search_results = index.search('title:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
+        else:
+          search_results = index.search('title:"' + query + '" AND desc:"' + query + '"')
+        template_values = {results: search_results}
+        self.render('search_results.html', template_values)
+        return
+      except search.Error:
+        logging.error('err!')
+        self.abort(500)
 
         
  
 
 class BrowseCatPage(BaseRequestHandler):
-    def post(self, cat_page):
-      self.get()
+  def post(self, cat_page):
+    self.get()
 
-    def get(self, cat_page):
-        category = Category.find_by_slug(cat_page)
-        if not category:
-          self.abort(404)
-          return
+  def get(self, cat_page):
+      category = Category.find_by_slug(cat_page)
+      if not category:
+        self.abort(404)
         template_values = {category: category, items: category.items.all()}
+        return template_values
 
 class ItemPage(BaseRequestHandler):
 
-    def get(self, item_id):
-        self.post(item_id)
+  def get(self, item_id):
+      self.post(item_id)
 
-    def post(self, item_id): 
-        template_values = {}
-        self.render('ItemView.html', template_values)
+  def post(self, item_id): 
+      template_values = {}
+      self.render('ItemView.html', template_values)
 
 
 class ItemListPage(BaseRequestHandler):
 
-    def get(self):
-      self.post()
+  def get(self):
+    self.post()
 
-    def post(self):
-      template_values = {}
-      self.render('myItems.html', template_values)
+  def post(self):
+    template_values = {}
+    self.render('myItems.html', template_values)
 
 
 class RootHandler(BaseRequestHandler):
