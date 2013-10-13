@@ -36,12 +36,14 @@
 	  pendingItemsLocation[i] = "My Location " + i;
 	  pendingItemsArray[i] = "\
 		<div class=\"item_Box\" id=\"item_Box_Edit_" + i + "\">\
-		  <h3>" + pendingItemsTitle[i] + "</h3>\
-		  <p>Price: " + pendingItemsPrice[i] + "</p>\
-		  <p>Location: " + pendingItemsLocation[i] + "</p>\
-		  <p>Description: " + pendingItemsDescription[i] + "</p>\
-		  <input name=\"Edit Item\" type=\"button\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" value=\"Edit Item\" id=\"buttonEditPending" + i + "\"/>\
-		  <input name=\"Delete Item\" type=\"button\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"deleteModal\" value=\"Delete Item\" id=\"buttonDeletePending" + i + "\"/>\
+		  <div style=\"height:145px;\">\
+			<ul class=\"pricing-table\">\
+			  <li class=\"title\">" + pendingItemsTitle[i] + "</li>\
+			  <li class=\"description\">Price: " + pendingItemsPrice[i] + "</li>\
+			  <li class=\"description\">Location: " + pendingItemsLocation[i] + "</li>\
+			</ul>\
+		  </div>\
+		  <li class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></li>\
 		</div>";
 	}
 	
@@ -51,7 +53,15 @@
 	for(var i=0; i<buyRequestItemsSize; i++) { <!--Assigns HTML to each buyRequestItem-->
 	  buyRequestItemsArray[i] = "\
 		<div class=\"item_Box\" id=\"item_Box_Edit\">\
-		  <h3>Title Of Item " + i + "</h3>\
+		  <div style=\"height:150px;\">\
+			<ul class=\"pricing-table\">\
+			  <li class=\"title\">Title Of Item " + i + "</li>\
+			  <li class=\"description\"></li>\
+			  <li class=\"description\"></li>\
+			  <li class=\"description\"></li>\
+			  <li class=\"cta-button\"><a class=\"button\" href=\"#\">Edit Item</a></li>\
+			</ul>\
+		  </div>\
 		  <p>Location: Location of Item</p>\
 		  <p>Description of Item</p>\
 		  <input name=\"Edit Item\" type=\"button\" onclick=\"setCurrentID(this.id)\" data-reveal-id=\"editModal\" value=\"Edit Item\" id=\"buttonEditBuyRequest" + i + "\" style=\"x:0; y:0;\"/>\
