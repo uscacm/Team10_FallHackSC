@@ -5,8 +5,11 @@ from google.appengine.api import users
 
 class Category(db.Model):
     name = db.StringProperty(required=True)
-    priority_sort = db.IntegerProperty(required=True, default=0);
+    sort = db.IntegerProperty(required=True, default=0);
     created = db.DateProperty(auto_now_add=True)
+    slug = db.StringProperty(required=True)
+    visible = db.BooleanProperty()
+
 
 class User(db.Model):
     fbid = db.StringProperty(required=True)

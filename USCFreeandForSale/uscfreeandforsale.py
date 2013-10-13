@@ -28,8 +28,14 @@ application = webapp2.WSGIApplication([
     Route('/',               'handlers.MainPage',     name="home"),
     Route('/sell',           'handlers.SellPage',     name="sell"),
     Route('/browse',         'handlers.BrowsePage',   name="browse"),
-    Route(r'/item/<item_id:\d+>',    'handlers.ItemPage',     name='item'),
     Route('/items',          'handlers.ItemListPage', name='items'),
+
+    Route(r'/item/<item_id:\d+>', 'handlers.ItemPage',     name='item'),
+    Route('/category/<cat_slug>', 'handlers.BrowseCategoryPage', name='browse_category'),
+    Route('/search', 'handlers.SearchHandler', name='search'),
+
+    Route('/admin/category/add', 'handlers.AddCategory'),
+
 
     # auth routes
     Route('/profile',
