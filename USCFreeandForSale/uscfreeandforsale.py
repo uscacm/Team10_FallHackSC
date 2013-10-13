@@ -28,10 +28,8 @@ application = webapp2.WSGIApplication([
     Route('/',               'handlers.MainPage',     name="home"),
     Route('/sell',           'handlers.SellPage',     name="sell"),
     Route('/browse',         'handlers.BrowsePage',   name="browse"),
-    #Route(r'/item/(\d+)',     'handlers.ItemPage', name='item'),
-    Route('/hotdog',          'handlers.ItemListPage', name='items'),
-    Route('/test',           'handlers.TestPage',     name='test'),  #DEBUG_REMOVE
-    Route('/myitem',         'handlers.MyItemPage',       name='myitem'), #DEBUG_REMOVE
+    Route(r'/item/<item_id:\d+>',    'handlers.ItemPage',     name='item'),
+    Route('/items',          'handlers.ItemListPage', name='items'),
 
     # auth routes
     Route('/profile',
@@ -44,3 +42,5 @@ application = webapp2.WSGIApplication([
             handler='handlers.AuthHandler:_auth_callback', name='auth_callback')
 
 ], config=app_config, debug=True)
+
+

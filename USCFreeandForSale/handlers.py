@@ -62,10 +62,11 @@ class BaseRequestHandler(webapp2.RequestHandler):
     values.update(template_vars)
     
     # read the template or 404.html
-    try:
+    #try:
+    if (True):  
       self.response.write(self.jinja2.render_template(template_name, **values))
-    except TemplateNotFound:
-      self.abort(404)
+    #except TemplateNotFound:
+    #  self.abort(404)
 
   def head(self, *args):
     """Head is used by Twitter. If not there the tweet button shows 0"""
@@ -107,12 +108,12 @@ class BrowsePage(BaseRequestHandler):
         
 class ItemPage(BaseRequestHandler):
 
-    def get(self):
-        self.post()
+    def get(self, item_id):
+        self.post(item_id)
 
-    def post(self): 
+    def post(self, item_id): 
         template_values = {}
-        self.render('myItems.html', template_values)
+        self.render('ItemView.html', template_values)
 
 
 class ItemListPage(BaseRequestHandler):
@@ -122,29 +123,8 @@ class ItemListPage(BaseRequestHandler):
 
     def post(self):
       template_values = {}
-      self.render('Item_View.html', template_values)
+      self.render('myItems.html', template_values)
 
-#DEBUG_REMOVE
-class TestPage(BaseRequestHandler):
-
-    def get(self): 
-        template_values = {}
-        self.render('test.html', template_values)
-
-    def post(self):
-        template_values = {}
-        self.render('test.html', template_values)
-
-#DEBUG_REMOVE
-class MyItemPage(BaseRequestHandler):
-
-    def get(self): 
-        template_values = {}
-        self.render('myItems.html', template_values)
-
-    def post(self):
-        template_values = {}
-        self.render('myItems.html', template_values)
 
 class RootHandler(BaseRequestHandler):
 
