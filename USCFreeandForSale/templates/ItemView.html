@@ -1,31 +1,50 @@
-{% extends "views/_base.html" %}
+{% extends "_base.html" %}
 
 {% block content %}
 <!-- Everything above is for compatibility with _base.html -->
 <!-- Item name and line -->
-	<div class="row">
-		<div class="large-12 columns">
+<div class="row">
 			<h2>Item Name</h2>
-			<!--I have no idea what I'm doing... -->
 			<hr />
-		</div>
 	</div>
 	<div class="row">
 		<!-- Information display -->
 		<div class = "large-12 columns">
-			<h3>Description</h3>
+			<div class="row">
+				<h3>Photo</h3>
+			</div>
+			<div class="row">
+				<div class="panel">
+					<p>This is where the photo goes.<br />I need to check how to include photos.</p>
+				</div>
+			</div>
+			<div class="row">
+				<h3>Category</h3>
+			</div>
+			<div class="row">
+				<div class="panel">
+					<p>This is where the category goes.<br />I imagine we will actually be using a string or something.</p>
+				</div>
+			</div>
+			<div class="row">
+				<h3>Description</h3>
+			</div>
 			<div class="row">
 				<div class="panel">
 					<p>This is where the description goes.<br />I imagine we will actually be using a string or something.</p>
 				</div>
 			</div>
-			<h3>Price</h3>
+			<div class="row">
+				<h3>Price</h3>
+			</div>
 			<div class="row">
 				<div class="panel">
 					<p>This is where the price goes.<br />I imagine we will actually be using a string or something.</p>
 				</div>
 			</div>
-			<h3>Seller Information</h3>
+			<div class="row">
+				<h3>Seller Information</h3>
+			</div>
 			<div class="row">
 				<div class = "large-2 columns">
 					<h5>Contact:</h5>
