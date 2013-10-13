@@ -11,17 +11,16 @@ class Category(db.Model):
     visible = db.BooleanProperty()
 
 def create_item(params):
-    my_document = search.Document(
+    #item
+
+    new_search_document = search.Document(
     # Setting the doc_id is optional. If omitted, the search service will create an identifier.
-    doc_id = 'PA6-5000'
-    fields=[
-       search.TextField(name='customer', value='Joe Jackson'),
-       search.HtmlField(name='comment', value='this is <em>marked up</em> text'),
-       search.NumberField(name='number_of_visits', value=7), 
-       search.DateField(name='last_visit', value=datetime.now()),
-       search.DateField(name='birthday', value=datetime(year=1960, month=6, day=19)),
-       search.GeoField(name='home_location', value=search.GeoPoint(37.619, -122.37))
-       ])
+    doc_id = item.key,
+    fields = [
+       search.TextField(name='title', value='Joe Jackson'),
+       search.TextField(name='description', value='thasdft'),
+       search.TextField(name='category', value='')
+    ])
 
 class User(db.Model):
     fbid = db.StringProperty(required=True)
