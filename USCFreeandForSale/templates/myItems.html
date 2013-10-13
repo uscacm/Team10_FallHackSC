@@ -1,4 +1,5 @@
-<body>
+{% extends "_base.html" %} {% block content %}
+
   <style>
 	.item_Box {
 	  width:200px;
@@ -17,7 +18,10 @@
 		display:block;
 	}
   </style>
-
+  
+  <script>
+  </script>
+  
   <div id="my_Items_Title">
   <h2>My Items</h2>
   
@@ -30,35 +34,35 @@
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" data-reveal-id="editModal" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
     </ul>
   </div>
@@ -72,35 +76,35 @@
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
       <div class="item_Box" id="item_Box_Edit">
         <h3>Title Of Item</h3>
         <p>Location: Location of Item</p>
         <p>Description of Item</p>
         <input name="Edit Item" type="button" data-reveal-id="editModal" value="Edit Item" />
-        <input name="Delete Item" type="button" value="Delete Item" />
+        <input name="Delete Item" type="button" data-reveal-id="deleteModal" value="Delete Item" />
       </div>
     </ul>
   </div>
@@ -114,7 +118,7 @@
         <form class="custom">
           <label for="customDropdown"><h4>Category</h4></label>
           <select id="customDropdown">
-            <option DISABLED>Choose a category...</option>
+            <option>Choose a category...</option>
             <option>Appliances</option>
             <option>Furniture</option>
             <option>Clothing</option>
@@ -127,14 +131,27 @@
           </select>
         </form>
         <label><h4>Description</h4></label>
-        <input type="textarea" placeholder="Description of your item" class="error" />
-        <small class="error">Invalid entry</small>
+        <textarea placeholder="Description of your item" style="width:100%"></textarea>
         <label><h4>Photo</h4></label>
-        <input type="text" placeholder="Upload a photo of your item">
+        <input type="file" placeholder="Upload a photo of your item">
         <label><h4>Location</h4></label>
         <input type="text" placeholder="Where to get your item">
         <label><h4>Contact Info</h4></label>
         <input type="text" placeholder="Email, phone, or anything else">
+      </fieldset>
+    <form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+  
+  <div id="deleteModal" class="reveal-modal">
+  	<form class="custom">
+      <fieldset>
+        <legend><h2>Delete Confirmation</h2></legend>
+        <label><h3>Are you sure you want to delete this item?</h3></label>
+        <div style="text-align:center; width:100%; margin:10px">
+          <a href="#" class="button">Yes</a>
+          <a href="#" class="button">No</a>
+        </div>
       </fieldset>
     <form>
     <a class="close-reveal-modal">&#215;</a>
@@ -152,4 +169,4 @@
     $(document).foundation();
   </script>
   
-</body>
+{% endblock %}
