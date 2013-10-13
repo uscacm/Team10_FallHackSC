@@ -1,27 +1,21 @@
-import os
-import urllib
-import webapp2
-from webapp2 import route
-import jinja2
-import handlers
-import secrets
-
+import sys
 # inject './lib' dir in the path so that we can simply do "import ndb" 
 # or whatever there's in the app lib dir.
 if 'lib' not in sys.path:
     sys.path[0:0] = ['lib']
 
-
-JINJA_ENVIRONMENT = jinja2.Environment(
-  loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
-  extensions = ['jinja2.ext.autoescape'])
-
+import os, urllib
+import webapp2
+from webapp2 import Route
+import jinja2
+import secrets
+import handlers
 
 # webapp2 config
 app_config = {
   'webapp2_extras.sessions': {
     'cookie_name': '_simpleauth_sess',
-    'secret_key': SESSION_KEY
+    'secret_key': secrets.SESSION_KEY
   },
   'webapp2_extras.auth': {
     'user_attributes': []
