@@ -1,13 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Foundation 4</title>
-  
-  <link rel="stylesheet" href="css/foundation.css" />
-
-  <script type="text/javascript" src="js/vendor/custom.modernizr.js"></script>
+<body>
   <style>
 	.item_Box {
 	  width:200px;
@@ -26,9 +17,7 @@
 		display:block;
 	}
   </style>
-</head>
 
-<body>
   <div id="my_Items_Title">
   <h2>My Items</h2>
   
@@ -122,9 +111,8 @@
         <legend><h3>Edit Item</h3></legend>
         <label><h4>Title</h4></label>
         <input type="text" placeholder="Title of your item">
-        <label><h4>Category</h4></label>
-        <div class="custom dropdown">
-          <label for="customDropdown">Category</label>
+        <form class="custom">
+          <label for="customDropdown"><h4>Category</h4></label>
           <select id="customDropdown">
             <option DISABLED>Choose a category...</option>
             <option>Appliances</option>
@@ -137,7 +125,7 @@
             <option>Housing</option>
             <option>Misc</option>
           </select>
-        </div>
+        </form>
         <label><h4>Description</h4></label>
         <input type="textarea" placeholder="Description of your item" class="error" />
         <small class="error">Invalid entry</small>
@@ -165,4 +153,3 @@
   </script>
   
 </body>
-</html>
