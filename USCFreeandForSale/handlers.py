@@ -170,7 +170,26 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
      data is a user info dictionary.
      auth_info contains access token or oauth token and secret.
     """
-    auth_id = '%s:%s' % (provider, data['id'])
+
+    # Possible flow:
+    # 
+    # 1. check whether user exist, e.g.
+    #    User.get_by_auth_id(auth_id)
+    #
+    # 2. create a new user if it doesn't
+    #    User(**data).put()
+    #
+    # 3. sign in the user
+    #    self.session['_user_id'] = auth_id
+    #
+    # 4. redirect somewhere, e.g. self.redirect('/profile')
+    #
+    # See more on how to work the above steps here:
+    # http://webapp-improved.appspot.com/api/webapp2_extras/auth.html
+    # http://code.google.com/p/webapp-improved/issues/detail?id=20
+
+
+      auth_id = '%s:%s' % (provider, data['id'])
     logging.info('Looking for a user with id %s', auth_id)
     
     user = self.auth.store.user_model.get_by_auth_id(auth_id)
