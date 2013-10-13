@@ -12,10 +12,17 @@
 
  <!-- Nav Sidebar -->
 <!-- Main Section to Sell-->
- 
- 
+
+
 <font size=6 ><b>Sell Item</b></font><br><hr><br>
 	
+{% if logged_in %}
+	Not logged in.
+{% else %}
+	{{ current_user }}
+{% endif %}
+
+
 	<div class = "panels">
 		<div class = "large-11 columns">
 		<!-- Content for the sell area -->
