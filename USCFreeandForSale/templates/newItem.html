@@ -17,7 +17,7 @@
 <font size=6 ><b>Sell Item</b></font><br><hr><br>
 	
 	<div class = "panels">
-		<div class = "large-6 columns">
+		<div class = "large-11 columns">
 		<!-- Content for the sell area -->
 		<div id = "sellContent">
 			<!-- Item row -->
@@ -26,27 +26,15 @@
 					<h6 class="title"> Item: </h6>
 				</div>
 				<div class="large-6 columns">
-						<form>
+						<form data-abide>
 						<input type="text"  placeholder="New Item">
 						</form>
 				</div>
 				<!-- Empty div for spacing -->
-				<div class="large-1 columns"></div>
+				<div class="large-6 columns"></div>
 			</div>
 			
-			<!-- Photo area -->
-			<div class = "row">
-				<div class="large-5 columns">
-					<h6 class="title"> Photo: </h6>
-				</div>
-				<div class="large-6 columns">
-					<form>
-					<input type="file" id="photo" name="photofile" size="40">
-					</form>
-				</div>
-				<!-- empty div -->
-				<div class="large-1 columns"></div>
-			</div>
+			
 			
 			<!-- Category section -->
 			<div class="row">
@@ -75,6 +63,21 @@
 				<div class="large-1 columns"></div>
 			</div>
 				
+			<!-- Photo area -->
+			<div class = "row">
+				<div class="large-5 columns">
+					<h6 class="title"> Photo: </h6>
+				</div>
+				<div class="large-6 columns">
+					<form>
+					<button type="file" id="photo" name="photofile" size="40">Upload</button>
+					</form>
+				</div>
+				<!-- empty div -->
+				<div class="large-1 columns"></div>
+			</div>	
+				
+				
 			<!-- Description area -->	
 			<div class = "row">
 				<div class="large-5 columns">
@@ -96,7 +99,7 @@
 				</div>
 				<div class="large-6 columns">
 					<form>
-					<input type="text" name="location">
+					<input type="text" name="location" placeholder="Location">
 					</form>
 				</div>
 				<!-- Empty div for spacing -->
@@ -110,19 +113,19 @@
 				</div>
 				<div class="large-6 columns">
 					<form>
-					<input type="text" name="location">
+					<input type="text" name="location" placeholder="Best Way To Contact You">
 					</form>
 				</div>
 				<!-- Empty div for spacing -->
 				<div class="large-1 columns"></div>
 			</div>
 				
-			<br><input type="submit" value="Create"><br>			
+			<br><button type="submit">Create Item</button><br>			
 		</div>
 		</div>
 		
 		<!--File Photo-->
-		<div class = "large-6 columns"></div>
+		<div class = "large-1 columns"></div>
 	</div>
 
 </div>
