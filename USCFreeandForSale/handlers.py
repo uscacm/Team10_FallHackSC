@@ -134,30 +134,23 @@ class AddItemPage(BaseRequestHandler):
       self.redirect('/auth/facebook')
     else: 
       new_item = Item(item_name=self.request.get('item_name'), 
-                            description=self.request.get('description'), 
-                            data_source=0,
-                            pickup_location=self.request.get('location'),
-                            contact_method=self.request.get('contact'),
-                            photo_url = self.request.get('file_url'))
-							
-							
-      # if (self.request.get('category') != 'CATEGORY'):
-      #   categories = Category.all()
-      #   categories.filter('name ==', self.request.get('category'))
-      #   # category = Category.gql("WHERE name='%s'" % self.request.get('category'))
-        # new_item.category = categories.fetch(1);
-
+                      description=self.request.get('description'), 
+                      data_source=0,
+                      pickup_location=self.request.get('location'),
+                      contact_method=self.request.get('contact'))
+      if (self.request.get('file_url') != ' '):
+        photo_url = self.request.get('file_url')
+        new_item.photo_url = photo_url
       if (self.request.get('category') != 'CATEGORY'):
         category = Category.all().filter('name=', self.request.get('category')).get()
         new_item.category = category
-
       if (self.request.get('price').isdigit() ):
-		    new_item.price = float(self.request.get('price'))
+        new_item.price = float(self.request.get('price'))
 
       new_item.put()
 
       # Can comment out if broken
-      AddItemSearchIndexes(new_item)
+      # AddItemSearchIndexes(new_item)
 
 
       template_values['current_user'] = self.current_user
