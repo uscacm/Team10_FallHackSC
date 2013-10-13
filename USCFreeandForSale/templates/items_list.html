@@ -10,16 +10,20 @@
   </div>
 
 {% for item in items %}
+ 
   {% if items.index(item) % 3 == 0 %}
 	<div class="row">
   {% endif %}
+
   
+
   {% include "_item.html" with context %}
+
 
   {% if items.index(item) % 3 == 2 %}
 	</div class="row">
   {% endif %}
-	
+
 {% else %}
 
   <h4>No items found :(</h4>

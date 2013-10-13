@@ -27,18 +27,18 @@
   
 <!--Search Bar-->
   <div class="row panel">
-  <form class ="custom">
+  <form class="custom" method="GET" action='/search'>
 	<div class="large-2 columns" data-options="is_hover:true">
-		<select id="searchCat">
-		<option value="*">All</option>
+		<select name="cat" id="searchCat">
+		<option value="">All</option>
 		{% for category in categories %}
-			<option value="{{category.key}}">{{category.name}}</option>
+			<option value="{{category.key().id()}}">{{category.name}}</option>
 		{% endfor %}
 		</select>
     </div>
   
 	<div class="large-8 columns">
-		<input type="text" placeholder="Search"></input>
+		<input type="text" name="q" placeholder="Search"></input>
 	</div>
 	
 	<div class="large-2 columns">
