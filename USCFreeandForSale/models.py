@@ -25,5 +25,6 @@ class Item(db.Model):
     description = db.TextProperty(required=True)
     price = db.FloatProperty(required=False)
     data_source = db.IntegerProperty(required=True)
+	#0 for user input , 1 from facebook group.
     sold_date = db.DateProperty(required=False)
     created = db.DateProperty(auto_now_add=True)
