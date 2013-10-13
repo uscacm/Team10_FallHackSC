@@ -1,0 +1,50 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '638088996223390',                      // App ID from the app dashboard
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   
+   function TestMessage() {
+		FB.ui(
+  {
+    method: 'feed',
+    name: 'Facebook Dialogs',
+    link: 'https://developers.facebook.com/docs/dialogs/',
+    caption: 'Reference Documentation',
+    description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+  },
+  function(response) {
+    if (response && response.post_id) {
+      alert('Post was published.');
+    } else {
+      alert('Post was not published.');
+    }
+  }
+);
+   }
+</script>
+
+Hello world!
+<p>
+<a onClick="TestMessage()">TEST THIS!</a>
+
+
+{% endblock %}

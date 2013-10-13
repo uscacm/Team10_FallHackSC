@@ -86,8 +86,7 @@ class SellPage(BaseRequestHandler):
 
     def post(self):
         template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('newItem.html')
-        self.response.write(template.render(template_values))
+        self.render('newItem.html', template_values)
 
 class BrowsePage(BaseRequestHandler):
     def get(self): 
@@ -106,8 +105,25 @@ class ItemPage(BaseRequestHandler):
         template_values = {}
         self.render('Item_View.html', template_values)
 
-  
+#DEBUG_REMOVE
+class TestPage(BaseRequestHandler):
+    def get(self): 
+        template_values = {}
+        self.render('test.html', template_values)
 
+    def post(self):
+        template_values = {}
+        self.render('test.html', template_values)
+
+#DEBUG_REMOVE
+class MyItemPage(BaseRequestHandler):
+    def get(self): 
+        template_values = {}
+        self.render('myItems.html', template_values)
+
+    def post(self):
+        template_values = {}
+        self.render('myItems.html', template_values)
 
 class RootHandler(BaseRequestHandler):
   def get(self):

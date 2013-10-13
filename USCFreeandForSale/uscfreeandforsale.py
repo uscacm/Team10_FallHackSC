@@ -30,6 +30,8 @@ application = webapp2.WSGIApplication([
     Route('/browse',         'handlers.BrowsePage',   name="browse"),
     Route('/item/<item_id>', 'handlers.ItemPage:one', name='item'),
     Route('/items',          'handlers.ItemPage:all', name='items'),
+    Route('/test',           'handlers.TestPage',     name='test'),  #DEBUG_REMOVE
+    Route('/myitem',         'handlers.MyItemPage',       name='myitem'), #DEBUG_REMOVE
 
     # auth routes
     Route('/profile',
