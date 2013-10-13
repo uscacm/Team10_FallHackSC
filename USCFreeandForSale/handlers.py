@@ -148,7 +148,9 @@ class AddItemPage(BaseRequestHandler):
                             description=self.request.get('description'), 
                             data_source=0,
                             pickup_location=self.request.get('location'),
-                            contact_method=self.request.get('contact'))
+                            contact_method=self.request.get('contact'),
+							
+							photo_url = self.request.get('file_url'))
       # if (self.request.get('category') != 'CATEGORY'):
       #   categories = Category.all()
       #   categories.filter('name ==', self.request.get('category'))

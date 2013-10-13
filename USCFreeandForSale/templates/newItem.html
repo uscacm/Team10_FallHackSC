@@ -5,6 +5,8 @@
 <!-- Nav Sidebar -->
 <!-- Main Section to Sell-->
 
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <div class="row">
 	
@@ -89,9 +91,25 @@
 				</div>
 				<div class="large-6 columns">
 					
-					<input type="file" id="imgInp" size="40" accept="image/*" name="photo" />
+					<!--<input type="file" id="imgInp" size="40" accept="image/*" name="photo" /> -->
+					
+					<input type="filepicker" data-fp-apikey="A9sWQqHKDSLu0QkEeY1qnz" data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-multiple="false" data-fp-services="COMPUTER,FACEBOOK,INSTAGRAM" onchange="
+					url1 = event.fpfile.url;
+
+					//do what you need to store the url
+					console.log(url1);
+					
+					
+					//insert into the page
+					$('#placeholder').attr('src', url1);
+					$('#url').attr('value', url1);
+					">
 					<br>
-					<img id="photo" src="#" alt="No Image Avaliable" />
+					<img id="placeholder" src="" alt="No Image Available"></img>
+					
+					<input type="hidden" id= "url" name="file_url" value = "" />
+					
+					<!--<img id="photo" src="#" alt="No Image Available" /> -->
 					
 				</div>
 				<!-- empty div -->
