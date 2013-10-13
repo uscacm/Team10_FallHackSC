@@ -142,7 +142,8 @@ class SearchHandler(BaseRequestHandler):
 
     def post(self):
       ###
-      ### should change to: https://developers.google.com/appengine/docs/python/prospectivesearch/
+      ### https://www.google.com/events/io/2011/sessions/full-text-search.html
+      ### NEed to insert items into the index when they get inserted into the db, update them aswell
       ###
         if not self.request.get('q')
           self.abort(404)
