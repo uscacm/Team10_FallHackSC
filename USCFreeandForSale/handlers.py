@@ -183,9 +183,9 @@ class SearchHandler(BaseRequestHandler):
       try:
         items_index = search.Index(name='items_search')
         if self.request.get('cat'):
-          search_results = index.search('title:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
+          search_results = index.search('name:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
         else:
-          search_results = index.search('title:"' + query + '" AND desc:"' + query + '"')
+          search_results = index.search('name:"' + query + '" AND desc:"' + query + '"')
         template_values = {results: search_results}
         self.render('search_results.html', template_values)
         return
@@ -212,7 +212,7 @@ class ItemPage(BaseRequestHandler):
       self.post(item_id)
 
   def post(self, item_id): 
-    item = Item.get(item_id)
+    item = Item.get_by_id(int(item_id))
     template_values = {'item': item}
     self.render('ItemView.html', template_values)
 
