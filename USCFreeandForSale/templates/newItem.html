@@ -5,6 +5,9 @@
 <!-- Nav Sidebar -->
 <!-- Main Section to Sell-->
 
+
+<div class="row">
+=======
 <h2>
 	{% if logged_in %}
 		Hi {{ current_user.name }}, sell your item below:
@@ -86,7 +89,8 @@
 				<div class="large-6 columns">
 					
 					<input type="file" id="imgInp" size="40" accept="image/*" />
-					
+					<br>
+					<img id="photo" src="#" alt="No Image Avaliable" />
 					
 				</div>
 				<!-- empty div -->
@@ -145,6 +149,5 @@
 	</form>
 
 </div>
-
 
 {% endblock %}
