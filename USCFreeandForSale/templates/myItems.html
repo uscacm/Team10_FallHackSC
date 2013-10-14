@@ -20,20 +20,33 @@
 	}
   </style>
   
+{% for item in items %}
+  <div class="item_Box" id="item_Box_Pending_0">
+   <div style="height:145px;">
+      <ul class="pricing-table">
+         <li class="title">{{item.name}}</li>
+         <li class="description">Price: {{item.price}}</li>
+         <li class="description">Location: {{item.pickup_location}}</li>
+      </ul>
+   </div>
+   <div class="cta-button" style="text-align:center;" onclick="setCurrentID(this.id); updateEditModal(this.id);" data-reveal-id="editModal" id="buttonEditPending0"><a class="button" href="#">Edit/Delete Item</a></div>
+</div>
+{% endfor %}
   
   <script>
-	<!--Setup for pendingItem section-->
-	var pendingItemsArray = new Array(); <!--Holds HTML for each pendingItem-->
+	//Setup for pendingItem section
+	var pendingItemsArray = new Array(); 
 	var pendingItemsTitle = new Array();
 	var pendingItemsPrice = new Array();
 	var pendingItemsDescription = new Array();
 	var pendingItemsLocation = new Array();
-	var pendingItemsSize = 5;
-	for(var i=0; i<pendingItemsSize; i++) { <!--Assigns HTML to each pendingItem-->
-      pendingItemsTitle[i] = "Bicycle " + i;
-	  pendingItemsPrice[i] = i*4.99;
-	  pendingItemsDescription[i] = "Shiny red bike. I have a bunch of these that need to go.";
-	  pendingItemsLocation[i] = "USC Parkside #20"+i;
+	var pendingItemsSize = {{items|length}};
+	{% for item in items %}
+	//for(var i=0; i<pendingItemsSize; i++) { 
+      pendingItemsTitle[i] = "{{item.name}}";
+	  pendingItemsPrice[i] = "{{item.price}}";
+	  pendingItemsDescription[i] = "{{item.description}}";
+	  pendingItemsLocation[i] = "{{item.location}}";
 	  pendingItemsArray[i] = "\
 		<div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
 		  <div style=\"height:145px;\">\
@@ -45,10 +58,11 @@
 		  </div>\
 		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
 		</div>";
-	}
+	//}
+	{% endfor %}
 	
-	<!--Setup for buyRequest section-->
-	var buyRequestItemsArray = new Array(); <!--Holds HTML for each buyRequestItem-->
+	//Setup for buyRequest section
+	var buyRequestItemsArray = new Array(); 
 	var buyRequestItemsTitle = new Array();
 	var buyRequestItemsPrice = new Array();
 	var buyRequestItemsDescription = new Array();

@@ -17,7 +17,6 @@ from models import *
 from simpleauth import SimpleAuthHandler
 
 
-
 class BaseRequestHandler(webapp2.RequestHandler):
   def dispatch(self):
     # Get a session store for this request.
@@ -155,8 +154,7 @@ class AddItemPage(BaseRequestHandler):
       new_item.put()
 
       # Can comment out if broken
-      # AddItemSearchIndexes(new_item)
-
+      AddItemSearchIndexes(new_item)
 
       template_values['current_user'] = self.current_user
       template_values['item'] = new_item
@@ -187,14 +185,18 @@ class SearchHandler(BaseRequestHandler):
         return
 
       try:
+        query = self.request.get('q')
         items_index = search.Index(name='items_search')
-        if self.request.get('cat'):
-          search_results = index.search('name:"' + query + '" AND desc:"' + query + '" AND category:"'+self.request.get('cat')+'"')
+        if self.request.get('cat') and len(self.request.get('cat')) > 0:
+          search_results = items_index.search(query + 'AND category:"'+self.request.get('cat')+'"')
         else:
-          search_results = index.search('name:"' + query + '" AND desc:"' + query + '"')
-        template_values = {results: search_results}
+          #search_results = items_index.search(query)
+          search_results = items_index.search(query)
+        getter_ids = []
+        for result in search_results.results:
+          getter_ids.append(long(result.doc_id))
+        template_values = {"results": search_results.results, "term": self.request.get('q'), "cat": self.request.get('cat'), "items": Item.get_by_id(getter_ids)}
         self.render('search_results.html', template_values)
-        return
       except search.Error:
         logging.error('err!')
         self.abort(500)
@@ -229,7 +231,8 @@ class ItemListPage(BaseRequestHandler):
     self.post()
 
   def post(self):
-    template_values = {}
+    items = Items.all().fetch(limit=20)#.filter('user = ', self.current_user.auth_ids[0])
+    template_values = {'items': items}
     self.render('myItems.html', template_values)
 
 

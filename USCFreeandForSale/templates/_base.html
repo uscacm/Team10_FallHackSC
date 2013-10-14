@@ -32,17 +32,17 @@
 		<select name="cat" id="searchCat">
 		<option value="">All</option>
 		{% for category in categories %}
-			<option value="{{category.key().id()}}">{{category.name}}</option>
+			<option value="{{category.slug}}">{{category.name}}</option>
 		{% endfor %}
 		</select>
     </div>
   
 	<div class="large-8 columns">
-		<input type="text" name="q" placeholder="Search"></input>
+		<input type="text" id="search_box" name="q" placeholder="Search"></input>
 	</div>
 	
 	<div class="large-2 columns">
-		<a href="#" class="button prefix">Search</a>
+		<input type="submit" value="Search" class="button prefix" />
 	</div>
   </form>
   </div>
@@ -72,7 +72,7 @@
   </script>
 
   <!-- Custom Javascript sh!t. -->
-  <script src="assets/js/image_viewer.js"></script>
+  <script src="/assets/js/image_viewer.js"></script>
 
   <script src="/assets/Foundation4/js/foundation.min.js"></script>
   <script>

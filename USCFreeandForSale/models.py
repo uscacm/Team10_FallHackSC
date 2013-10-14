@@ -11,25 +11,24 @@ class Category(db.Model):
     visible = db.BooleanProperty()
 
 def AddItemSearchIndexes(item):
-    
-    return
 
     fields = [
-       search.TextField(name='name', value=item.item_name),
-       search.TextField(name='description', value=item.description)
+       search.TextField(name='name',        value=item.item_name),
+       search.TextField(name='description', value=item.description),
+       search.DateField(name='created',     value=datetime.now()),
     ]
 
-    # Setting the doc_id is optional. If omitted, the search service will create an identifier.
     if item.category:
         fields.append(search.TextField(name='category', value=item.category.slug))
     if item.price:
         fields.append(search.NumberField(name='price', value=item.price))
 
     new_search_document = search.Document(
-        doc_id = item.key,
+        doc_id = str(item.key().id()),
         fields = fields
     )
-    new_search_document.put()
+    index = search.Index(name='items_search')
+    index.put(new_search_document)
 
 class User(db.Model):
     fbid = db.StringProperty(required=True)
