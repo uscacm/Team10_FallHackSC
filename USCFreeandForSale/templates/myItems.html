@@ -19,19 +19,7 @@
 		display:block;
 	}
   </style>
-  
-{% for item in items %}
-  <div class="item_Box" id="item_Box_Pending_0">
-   <div style="height:145px;">
-      <ul class="pricing-table">
-         <li class="title">{{item.name}}</li>
-         <li class="description">Price: {{item.price}}</li>
-         <li class="description">Location: {{item.pickup_location}}</li>
-      </ul>
-   </div>
-   <div class="cta-button" style="text-align:center;" onclick="setCurrentID(this.id); updateEditModal(this.id);" data-reveal-id="editModal" id="buttonEditPending0"><a class="button" href="#">Edit/Delete Item</a></div>
-</div>
-{% endfor %}
+
   
   <script>
 	//Setup for pendingItem section
@@ -44,17 +32,17 @@
 	var pendingItemsSize = {{items|length}};
 	{% for item in items %}
 	//for(var i=0; i<pendingItemsSize; i++) { 
-      pendingItemsTitle[i] = "{{item.name}}";
-	  pendingItemsPrice[i] = "{{item.price}}";
-	  pendingItemsDescription[i] = "{{item.description}}";
-	  pendingItemsLocation[i] = "{{item.location}}";
-	  pendingItemsArray[i] = "\
-		<div class=\"item_Box\" id=\"item_Box_Pending_" + i + "\">\
+      pendingItemsTitle[{{loop.index-1}}] = "{{item.item_name}}";
+	  pendingItemsPrice[{{loop.index-1}}] = "{{item.price}}";
+	  pendingItemsDescription[{{loop.index-1}}] = "{{item.description}}";
+	  pendingItemsLocation[{{loop.index-1}}] = "{{item.location}}";
+	  pendingItemsArray[{{loop.index-1}}] = "\
+		<div class=\"item_Box\" id=\"item_Box_Pending_" + {{loop.index-1}} + "\">\
 		  <div style=\"height:145px;\">\
 			<ul class=\"pricing-table\">\
-			  <li class=\"title\">" + pendingItemsTitle[i] + "</li>\
-			  <li class=\"description\">Price: " + pendingItemsPrice[i] + "</li>\
-			  <li class=\"description\">Location: " + pendingItemsLocation[i] + "</li>\
+			  <li class=\"title\">" + pendingItemsTitle[{{loop.index-1}}] + "</li>\
+			  <li class=\"description\">Price: " + pendingItemsPrice[{{loop.index-1}}] + "</li>\
+			  <li class=\"description\">Location: " + pendingItemsLocation[{{loop.index-1}}] + "</li>\
 			</ul>\
 		  </div>\
 		  <div class=\"cta-button\" style=\"text-align:center;\" onclick=\"setCurrentID(this.id); updateEditModal(this.id);\" data-reveal-id=\"editModal\" id=\"buttonEditPending" + i + "\"/><a class=\"button\" href=\"#\">Edit/Delete Item</a></div>\
@@ -286,16 +274,5 @@
 	document.getElementById("buyRequestArea").innerHTML = updateItems(buyRequestItemsSize, buyRequestItemsArray);
   </script>
   
-  <script>
-	document.write('<script src=' +
-	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-	'.js><\/script>')
-  </script>
-  <script src="js/foundation/foundation.js"></script>
-  <script src="js/foundation/foundation.section.js"></script>
-  <script src="js/foundation/foundation.reveal.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
   
 {% endblock %}

@@ -232,7 +232,7 @@ class ItemListPage(BaseRequestHandler):
     self.post()
 
   def post(self):
-    items = Items.all().fetch(limit=20)#.filter('user = ', self.current_user.auth_ids[0])
+    items = Item.all().filter('user = ', self.current_user.auth_ids[0]).fetch(40)
     template_values = {'items': items}
     self.render('myItems.html', template_values)
 
