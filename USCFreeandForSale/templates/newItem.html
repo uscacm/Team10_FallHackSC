@@ -42,6 +42,21 @@
 			
 			<br>
 			
+			<!-- Description area -->	
+			<div class = "row">
+				<div class="large-5 columns">
+					<h6 class="title"> Description: </h6>
+				</div>
+				<div class="large-6 columns">
+					
+						<textarea rows="5" cols="60" placeholder="Description" name="description" required></textArea>
+					
+				</div>
+				<!-- Empty div for spacing -->
+				<div class="large-1 columns"></div>
+			</div>
+			<br>
+
 			<!-- Price stuff -->
 			<div class = "row">
 				<div class="large-5 columns">
@@ -64,17 +79,11 @@
 				<div class="large-6 columns">
 				
 					<select id="customDropdown" name="category">
+
 						<option value="CATEGORY" DISABLED SELECTED>Please Choose</option>
-						<option value="Appliances">Appliances</option>
-						<option value="Books">Books</option>
-						<option value="Clothing">Clothing</option>
-						<option value="Electronics">Electronics</option>
-						<option value="Furniture">Furniture</option>
-						<option value="Housing">Housing</option>
-						<option value="Tickets">Tickets</option>
-						<option value="Transportation">Transportation</option>
-						<option value="Vehicle">Vehicle</option>
-						<option value="Misc">Misc</option>
+						{% for category in categories %}
+							<option value="{{category.name}}">{{category.name}}</option>
+						{% endfor %}
 					</select>
 					
 					
@@ -117,28 +126,15 @@
 			</div>
 				<br>
 				
-			<!-- Description area -->	
-			<div class = "row">
-				<div class="large-5 columns">
-					<h6 class="title"> Description: </h6>
-				</div>
-				<div class="large-6 columns">
-					
-						<textarea rows="5" cols="60" placeholder="Description" name="description" required></textArea>
-					
-				</div>
-				<!-- Empty div for spacing -->
-				<div class="large-1 columns"></div>
-			</div>
-			<br>
+			
 			<!-- Location stuff -->
-			<div class = "row">
+			<div class="row">
 				<div class="large-5 columns">
 					<h6 class="title"> Location: </h6>
 				</div>
 				<div class="large-6 columns">
 					
-					<input type="text" name="location" placeholder="Location" required>
+					<input type="text" name="location" placeholder="Location" />
 					
 				</div>
 				<!-- Empty div for spacing -->
@@ -146,13 +142,13 @@
 			</div>
 				
 			<!-- how to contact -->
-			<div class = "row">
+			<div class="row">
 				<div class="large-5 columns">
 				<h6 class="title"> Your Contact Info: </h6>
 				</div>
 				<div class="large-6 columns">
 					
-					<input type="text" name="contact" placeholder="Best Way To Contact You" required>
+					<input type="text" name="contact" placeholder="Best Way To Contact You" />
 					
 				</div>
 				<!-- Empty div for spacing -->

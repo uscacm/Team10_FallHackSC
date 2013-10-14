@@ -25,11 +25,11 @@ app_config = {
 application = webapp2.WSGIApplication([
 
     # app routes
-    Route('/',               'handlers.MainPage',     name="home"),
-    Route('/sell',           'handlers.SellPage',     name="sell"),
-    Route('/additem',       'handlers.AddItemPage',  name="additem"),
-    Route('/browse',         'handlers.BrowsePage',   name="browse"),
-    Route('/items',          'handlers.ItemListPage', name='items'),
+    Route('/',        'handlers.MainPage',     name="home"),
+    Route('/sell',    'handlers.SellPage',     name="sell"),
+    Route('/additem', 'handlers.AddItemPage',  name="additem"),
+    Route('/browse',  'handlers.BrowsePage',   name="browse"),
+    Route('/items',   'handlers.ItemListPage', name='items'),
 
     Route(r'/item/<item_id:\d+>', 'handlers.ItemPage',     name='item'),
     Route('/category/<cat_slug>', 'handlers.BrowseCategoryPage', name='browse_category'),

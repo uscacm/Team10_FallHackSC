@@ -126,6 +126,7 @@ class SellPage(BaseRequestHandler):
         if not self.logged_in:
           self.redirect('/auth/facebook')
         else:
+          template_values['categories'] = self.category_list()
           template_values['current_user'] = self.current_user
           self.render('newItem.html', template_values)
 
@@ -139,7 +140,7 @@ class AddItemPage(BaseRequestHandler):
       new_item = Item(user=self.current_user.auth_ids[0],
                       item_name=self.request.get('item_name'), 
                       description=self.request.get('description'), 
-                      data_source=0,
+                      data_source=0, # data source = from website
                       pickup_location=self.request.get('location'),
                       contact_method=self.request.get('contact'))
       if (self.request.get('file_url') != ' '):

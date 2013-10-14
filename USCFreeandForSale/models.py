@@ -15,7 +15,7 @@ def AddItemSearchIndexes(item):
     fields = [
        search.TextField(name='name',        value=item.item_name),
        search.TextField(name='description', value=item.description),
-       search.DateField(name='created',     value=datetime.now()),
+       search.DateField(name='created',     value=datetime.datetime.now()),
     ]
 
     if item.category:
@@ -50,5 +50,5 @@ class Item(db.Model):
 	#0 for user input , 1 from facebook group.
     sold_date = db.DateProperty(required=False)
     pickup_location = db.StringProperty(required=False)
-    contact_method = db.StringProperty(required=True)
+    contact_method = db.StringProperty(required=False)
     created = db.DateProperty(auto_now_add=True)
