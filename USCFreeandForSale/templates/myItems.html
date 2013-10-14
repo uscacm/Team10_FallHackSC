@@ -40,6 +40,7 @@
 	var pendingItemsPrice = new Array();
 	var pendingItemsDescription = new Array();
 	var pendingItemsLocation = new Array();
+
 	var pendingItemsSize = {{items|length}};
 	{% for item in items %}
 	//for(var i=0; i<pendingItemsSize; i++) { 
@@ -67,11 +68,13 @@
 	var buyRequestItemsPrice = new Array();
 	var buyRequestItemsDescription = new Array();
 	var buyRequestItemsLocation = new Array();
-	var buyRequestItemsSize = 5;
+	var buyRequestItemsSize = 2;
 	for(var i=0; i<buyRequestItemsSize; i++) { <!--Assigns HTML to each buyRequestItem-->
-	  buyRequestItemsTitle[i] = "Car " + i;
-	  buyRequestItemsPrice[i] = i*4.99;
-	  buyRequestItemsDescription[i] = "I'm a car dealership! Please buy."
+	  buyRequestItemsTitle[0] = "Toyota Junker";
+      buyRequestItemsTitle[1] = "Ferrari";	  
+	  buyRequestItemsPrice[i] = (i+1)*321804.99;
+	  buyRequestItemsDescription[0] = "Used toyota. Has no seats."
+	  buyRequestItemsDescription[1] = "It's actually a toy car."
 	  buyRequestItemsLocation[i] = "Felix Cars";
 	  buyRequestItemsArray[i] = "\
 	    <div class=\"item_Box\" id=\"item_Box_BuyReqeust_" + i + "\">\
