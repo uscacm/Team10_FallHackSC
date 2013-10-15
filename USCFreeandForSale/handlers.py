@@ -182,6 +182,7 @@ class BuyRequestHandler(BaseRequestHandler):
   def post(self):
     if not self.current_user:
       self.redirect('/fb/auth')
+      return
 
     item = Item.get_by_id(long(self.request.get('item_id')))
     if not item:
