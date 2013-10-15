@@ -45,6 +45,7 @@ class BaseRequestHandler(webapp2.RequestHandler):
   
   @webapp2.cached_property
   def current_user(self):
+    if self.auth.get_user_by_session() is None: return None
     """ Returns currently logged in user """
     user_dict = self.auth.get_user_by_session()
     return self.auth.store.user_model.get_by_id(user_dict['user_id'])
