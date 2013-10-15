@@ -124,6 +124,9 @@ class AddCategory(BaseRequestHandler):
 
 class SellPage(BaseRequestHandler):
 
+    def get(self): 
+        self.post()
+
     def post(self):
       template_values = {}
       if not self.logged_in:	  
