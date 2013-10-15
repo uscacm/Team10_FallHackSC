@@ -70,11 +70,13 @@ class BaseRequestHandler(webapp2.RequestHandler):
     values = {
       'url_for': self.uri_for,
       'logged_in': self.logged_in,
-      'current_user': self.current_user,
       'flashes': self.session.get_flashes(),
       'categories': self.category_list()
     }
     
+    if self.logged_in:
+       values['current_user'] = self.current_user
+
     # Add manually supplied template values
     values.update(template_vars)
     
