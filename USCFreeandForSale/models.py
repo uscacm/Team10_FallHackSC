@@ -52,3 +52,12 @@ class Item(db.Model):
     pickup_location = db.StringProperty(required=False)
     contact_method = db.StringProperty(required=False)
     created = db.DateProperty(auto_now_add=True)
+
+
+class BuyRequest(db.Model):
+    message = db.StringProperty(required=False)
+    phone = db.StringProperty(required=False)
+    from_user = db.StringProperty(required=True)
+    item_id = db.ReferenceProperty(Item, required=True, collection_name='buy_requests')
+    to_user = db.StringProperty(required=True)
+    reqd = db.BooleanProperty(required=True, default=False)

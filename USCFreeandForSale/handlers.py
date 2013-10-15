@@ -66,9 +66,11 @@ class BaseRequestHandler(webapp2.RequestHandler):
       
   def render(self, template_name, template_vars={}):
     # Preset values for the template
+    logging.info(self.current_user)
     values = {
       'url_for': self.uri_for,
       'logged_in': self.logged_in,
+      'current_user': self.current_user,
       'flashes': self.session.get_flashes(),
       'categories': self.category_list()
     }
@@ -125,6 +127,7 @@ class SellPage(BaseRequestHandler):
         template_values = {}
         if not self.logged_in:
           self.redirect('/auth/facebook')
+          self.session['next'] = '/sell'
         else:
           template_values['categories'] = self.category_list()
           template_values['current_user'] = self.current_user
@@ -171,6 +174,35 @@ class BrowsePage(BaseRequestHandler):
     template_values = {'items':items}
     self.render('items_list.html', template_values)
        
+
+class BuyRequestHandler(BaseRequestHandler):
+  def post(self):
+    if not self.current_user:
+      self.redirect('/fb/auth')
+
+    item = Item.get(self.request.get('item_id'))
+    if not item:
+      self.abort(404)
+      return
+
+    user = self.current_user
+    buy_req = BuyRequest(
+        message=self.request.get('message'),
+        phone=self.request.get('phone'),
+        from_user = self.current_user.auth_ids[0],
+        to_user = item.user,
+        item=item)
+
+    buy_req.put()
+    self.render('request_successful.html', {'request': buy_req})
+
+    #class BuyRequest(db.Model):
+    #description = db.StringProperty(required=False)
+    #phone = db.StringProperty(required=False)
+    #from_user = db.StringProperty(required=True)
+    #item = db.ReferenceProperty(Item, required=True, collection_name='buy_requests')
+    #to_user = db.StringProperty(required=True)
+
 class SearchHandler(BaseRequestHandler):
 
   def get(self): 
@@ -407,7 +439,7 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     self.session.add_flash(auth_info, 'auth_info - from _on_signin(...)')
 
     # Go to the profile page
-    self.redirect('/profile')
+    self.redirect('/')
 
   def logout(self):
     self.auth.unset_session()
