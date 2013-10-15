@@ -316,6 +316,15 @@
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
+<div class="row">	
+  {% for request in buy_requests %}
+  <p>
+	{{ request.message }}
+	{{ request.from_user_obj }}
+</p>
+  {% endfor %}
+</div>
+
   <script>
     // Renders stuff the first time around
 	document.getElementById("pendingArea").innerHTML = updateItems(pendingItemsSize, pendingItemsArray);

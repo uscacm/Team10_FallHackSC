@@ -180,21 +180,21 @@ class BuyRequestHandler(BaseRequestHandler):
     if not self.current_user:
       self.redirect('/fb/auth')
 
-    item = Item.get(self.request.get('item_id'))
+    item = Item.get_by_id(long(self.request.get('item_id')))
     if not item:
       self.abort(404)
       return
 
     user = self.current_user
     buy_req = BuyRequest(
-        message=self.request.get('message'),
-        phone=self.request.get('phone'),
+        message   = self.request.get('message'),
+        phone     = self.request.get('phone'),
         from_user = self.current_user.auth_ids[0],
-        to_user = item.user,
-        item=item)
+        to_user   = item.user,
+        item      = item)
 
     buy_req.put()
-    self.render('request_successful.html', {'request': buy_req})
+    self.render('request_successful.html', {'buy_request': buy_req, 'item': item, 'to_user': self.auth.store.user_model.get_by_auth_id(item.user)})
 
     #class BuyRequest(db.Model):
     #description = db.StringProperty(required=False)
@@ -269,7 +269,11 @@ class ItemListPage(BaseRequestHandler):
       return
       
     items = Item.all().filter('user = ', self.current_user.auth_ids[0]).fetch(40)
-    template_values = {'items': items}
+    buy_requests = BuyRequest.all().filter('to_user = ', self.current_user.auth_ids[0]).fetch(40)
+    for buy_request in buy_requests:
+      buy_request.from_user_obj = self.auth.store.user_model.get_by_auth_id(buy_request.from_user)
+      
+    template_values = {'items': items, 'buy_requests': buy_requests}
     self.render('myItems.html', template_values)
 
 
@@ -391,6 +395,7 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     # http://webapp-improved.appspot.com/api/webapp2_extras/auth.html
     # http://code.google.com/p/webapp-improved/issues/detail?id=20
 
+    logging.info(**data)
 
     auth_id = '%s:%s' % (provider, data['id'])
     logging.info('Looking for a user with id %s', auth_id)
@@ -438,8 +443,11 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     self.session.add_flash(data, 'data - from _on_signin(...)')
     self.session.add_flash(auth_info, 'auth_info - from _on_signin(...)')
 
-    # Go to the profile page
-    self.redirect('/')
+    if self.session['next']:
+      self.redirect(self.session['next'])
+    else:
+      # Go to the profile page
+      self.redirect('/')
 
   def logout(self):
     self.auth.unset_session()

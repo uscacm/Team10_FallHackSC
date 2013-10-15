@@ -53,11 +53,12 @@ class Item(db.Model):
     contact_method = db.StringProperty(required=False)
     created = db.DateProperty(auto_now_add=True)
 
-
 class BuyRequest(db.Model):
     message = db.StringProperty(required=False)
     phone = db.StringProperty(required=False)
     from_user = db.StringProperty(required=True)
-    item_id = db.ReferenceProperty(Item, required=True, collection_name='buy_requests')
+    item = db.ReferenceProperty(Item, required=True, collection_name='buy_requests')
     to_user = db.StringProperty(required=True)
     reqd = db.BooleanProperty(required=True, default=False)
+    def get_from_user(self):
+        return User.get_by_auth_id(from_user)

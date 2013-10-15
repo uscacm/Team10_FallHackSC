@@ -10,6 +10,7 @@
 	<div class="row">
 		<!-- Information display -->
 		<div class = "large-12 columns">
+			{% if item.photo_url %}
 			<div class="row">
 				<h3>Photo</h3>
 			</div>
@@ -18,6 +19,7 @@
 					<img src="{{item.photo_url}}" />
 				</div>
 			</div>
+			{% endif %}
 			<div class="row">
 				<h3>Category</h3>
 			</div>
@@ -34,6 +36,7 @@
 					<p>{{item.description}}</p>
 				</div>
 			</div>
+			{% if item.price %}
 			<div class="row">
 				<h3>Price</h3>
 			</div>
@@ -42,6 +45,8 @@
 					<p>{{item.price}}</p>
 				</div>
 			</div>
+			{% endif %}
+			{% if item.contact_method or item.pickup_location %}
 			<div class="row">
 				<h3>Seller Information</h3>
 			</div>
@@ -65,9 +70,15 @@
 					</div>
 				</div>	
 			</div>
+			{% endif %}
 			<!-- Open Modal button -->
 			<div class="row">
-				<a href="#" data-reveal-id="yourInfoModal" class="success button">Contact</a>
+				{% if logged_in %}
+					<a href="#" data-reveal-id="yourInfoModal" class="success button">Contact</a>
+				{% else %}
+					<form action="/buy_request" method="POST"><input type="hidden" name="item_id" value="{{item.key().id()}}" /><input value="Login to request" class="success button" type="submit" /></form>
+				{% endif %}
+				
 			</div>
 		</div>
 	</div>
@@ -75,23 +86,28 @@
  <!-- Modal that asks for personal info input -->
  <div id="yourInfoModal" class="reveal-modal">
 	<div class="row">
-		<h3>Input your personal information:</h3>
+		<h3>Send the seller a message:</h3>
 		<hr />
 	</div>
-	<form data-abide><fieldset>
-		<legend>Personal Information</legend>
+	<form data-abide action="/buy_request" method="POST">
+<input type="hidden" name="item_id" value="{{item.key().id()}}" />
+
+		<fieldset>
+		<legend>Contact Information</legend>
 		<div class="row">
 		<div class = "large-12 columns">
-			<label for="name">Name</label>
-			<input id="name" placeholder="Your Name (e.g. John Smith)" type="text" required pattern="[a-zA-Z]+">
-			 <small class="error">Name is required and must be a string.</small>
+			<label for="phone">Phone Number (optional)</label>
+			<input type="tel" id="phone" placeholder="1 234-567-8910">
+			<!--<small class="error" data-error-message>Please enter a properly formatted telephone number.</small>-->
 		</div></div>
+
 		<div class="row">
-		<div class = "large-12 columns">
-			<label for="phone">Phone Number</label>
-			<input type="tel" required id="phone" placeholder="1 234-567-8910">
-			<small class="error" data-error-message>Please enter a properly formatted telephone number.</small>
-		</div></div>
+			<div class="large-12 columns">
+				<label for="message">Message:</label>
+				<textarea rows="3" cols="80" name="message"></textarea>
+			</div>
+		</div><br />
+
 		<div class="row">
 		<div class = "large-12 columns">
 			<p><button type="submit">Submit</button></p>

@@ -30,6 +30,7 @@ application = webapp2.WSGIApplication([
     Route('/additem', 'handlers.AddItemPage',  name="additem"),
     Route('/browse',  'handlers.BrowsePage',   name="browse"),
     Route('/items',   'handlers.ItemListPage', name='items'),
+    Route('/buy_request', 'handlers.BuyRequestHandler', name='buy_req'),
 
     Route(r'/item/<item_id:\d+>', 'handlers.ItemPage',     name='item'),
     Route('/category/<cat_slug>', 'handlers.BrowseCategoryPage', name='browse_category'),
