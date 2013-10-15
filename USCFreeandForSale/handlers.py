@@ -167,6 +167,35 @@ class AddItemPage(BaseRequestHandler):
       template_values['item'] = new_item
       self.render('ItemView.html', template_values)
 
+class UpdateItem(BaseRequestHandler): 
+  def post(self, item_id):
+    template_values={}
+    if not self.logged_in:
+      self.redirect('auth/facebook')
+    else:
+      item = Item.get_by_id(int(item_id))
+      item.item_name = self.request.get('item_name')
+      item.description = self.request.get('description')
+      item.pickup_location = self.request.get('location')
+      item.contact_method = self.request.get('contact')
+      item.put()
+
+      self.redirect("/items")
+
+class DeleteItem(BaseRequestHandler):
+  def get(self, item_id):
+    self.post(item_id)
+
+  def post(self, item_id):
+    template_values={}
+    if not self.logged_in:
+      self.redirect('auth/facebook')
+    else: 
+      item = Item.get_by_id(int(item_id))
+      db.delete(item.key())
+
+      self.redirect("/items")
+
 class BrowsePage(BaseRequestHandler):
 
   def get(self): 
@@ -278,7 +307,7 @@ class ItemListPage(BaseRequestHandler):
       buy_request.from_user_obj = self.auth.store.user_model.get_by_auth_id(buy_request.from_user)
       
     template_values = {'items': items, 'buy_requests': buy_requests}
-    self.render('myItems.html', template_values)
+    self.render('my_items.html', template_values)
 
 
 class RootHandler(BaseRequestHandler):

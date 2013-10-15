@@ -1,0 +1,159 @@
+{% extends "_base.html" %} 
+{% block content %}
+
+<style>
+  .item_Box {
+    width:200px;
+    height:200px;
+    padding:2px;
+    border:1px solid black;
+    display:inline-block;
+    white-space:normal;
+  }
+  .scroll_Area {
+    height:220px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    padding-left:11px;
+    padding-right:7px;
+    display:block;
+  }
+</style>
+
+<script type="text/javascript">
+
+function openModel(itemID) {
+  document.getElementById('deleteButton').href= "/delete/" + itemID;
+  document.editform.action = "/update/" + itemID;
+  return;
+}
+
+<!--Closes the modal with id idString, with syntax '#MODALNAME'-->
+function closeModal(idString) {
+  $(idString).foundation('reveal', 'close');
+}
+</script>
+
+<div id="my_Items_Title">
+  <h2>My Items</h2>
+  
+  <h3>Pending</h3>
+  <hr />
+  <div class="scroll_Area">
+    <ul class="small-block-grid-2">
+      <div id="pendingArea">
+
+        {% for item in items %}
+
+          <!-- Single box --> 
+          <div class="item_Box" id="item_Box_Pending_0">
+            <div style="height:145px;">
+              <ul class="pricing-table">
+                <li class="title">{{item.item_name}}</li>
+                <li class="description">Price: {{item.price}}</li>
+                <li class="description">Location: {{item.pickup_location}}</li>
+              </ul>
+            </div>
+            <div class="cta-button" style="text-align:center;" data-reveal-id="editModal" id="{{item.key().id()}}" onclick="openModel({{item.key().id()}});">
+              <a class="button" href="#" >Edit/Delete Item</a>
+            </div>
+          </div>
+
+        {% endfor %}
+      </div>
+    </ul>
+  </div>
+
+  <h3>Buy Requests</h3>
+  <hr />
+  <div class="scroll_Area">
+    <ul class="small-block-grid-2">
+      <div id="buyRequestArea">
+
+        {% for item in buy_requests %}
+
+        <!-- Single box --> 
+        <div class="item_Box" id="item_Box_Pending_0">
+          <div style="height:145px;">
+            <ul class="pricing-table">
+              <li class="title">{{item.item_name}}</li>
+              <li class="description">Price: {{item.price}}</li>
+              <li class="description">Location: {{item.pickup_location}}</li>
+            </ul>
+          </div>
+          <div class="cta-button" style="text-align:center;">
+            <a class="button" href="item/{{item.key().id()}}">More Info</a> 
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </ul>
+  </div>
+</div>
+
+
+ <!--Modal to edit or delete an item-->
+  <div id="editModal" class="reveal-modal">
+    <form class="custom" name="editform" method="post" action=""><!--Create a form-->
+      <fieldset>
+        <legend><h3>Edit Item</h3></legend>
+        <label><h4>Title</h4></label>
+        <input type="text" name="item_name" placeholder="Title of your item" value="VALUE GOES HERE" />
+        <label><h4>Description</h4></label>
+        <textarea placeholder="Description of your item" id="descriptionEditor" style="width:100%; height:50px; resize:vertical;" name="description"> DESCRIPTION GOES HERE</textarea>
+        <label><h4>Price</h4></label>
+        <input type="number" placeholder="Optional" name="price" />
+        <!--Start dropdown section-->
+          <label for="customDropdown"><h4>Category</h4></label>
+          <select id="customDropdown" name="category">
+            <option value="CATEGORY" DISABLED SELECTED>Please Choose</option>
+            {% for category in categories %}
+            <option value="{{category.name}}">{{category.name}}</option>
+            {% endfor %}
+          </select>
+        <!--End dropdown section-->
+        <!--Start upload photo section grabbed from newItem page-->
+        <label><h4>Upload Photo</h4></label>
+        <input type="filepicker" data-fp-apikey="A9sWQqHKDSLu0QkEeY1qnz" data-fp-mimetypes="image/*" data-fp-container="modal" data-fp-multiple="false" data-fp-services="COMPUTER,FACEBOOK,INSTAGRAM" onchange="
+        url1 = event.fpfile.url;
+        $('#placeholder').attr('src', url1);
+        $('#url').attr('value', url1);
+        " />
+        <br><br>
+        <img id="placeholder" src="" alt="No Image Available"></img>
+        <!--End of upload photo section-->
+        <input type="hidden" id= "url" name="file_url" value = "" />
+        <label><h4>Location</h4></label>
+        <input type="text" id="locationEditor" name="location" placeholder="Where to get your item" value="LOCATION GOES HERE">
+        <label><h4>Contact Info</h4></label>
+        <input type="text" placeholder="Email, phone, or anything else" name="contact">
+        <div style="text-align:center; width:100%;">
+          <button class="button" type="submit">Submit Changes</button>
+        </div>
+      </fieldset>
+    </form>
+    
+    <fieldset>
+      <legend><h2>Delete</h2></legend>
+      <label><h3>Are you sure you want to delete this item?</h3></label>
+      <div class="cta-button"style="text-align:center;">
+        <a href="" id="deleteButton" class="button" style="width:100px">Yes</a><!--Fires the deleteItem function in the top script-->
+        <a onClick="closeModal('#editModal');" class="button" style="width:100px">No</a>
+      </div>
+    </fieldset>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+<div class="row"> 
+  {% for request in buy_requests %}
+  <p>
+    {{ request.message }}
+    {{ request.from_user_obj }}
+  </p>
+  {% endfor %}
+</div>
+
+{% endblock %}
