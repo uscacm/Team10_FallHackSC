@@ -425,8 +425,8 @@ class AuthHandler(BaseRequestHandler, SimpleAuthHandler):
     self.session.add_flash(auth_info, 'auth_info - from _on_signin(...)')
 
     # Go to the profile page
-    self.redirect('/profile')
-
+    #self.redirect('/profile')
+    self.redirect('/')
 
   
   def _on_signin__old(self, data, auth_info, provider):
