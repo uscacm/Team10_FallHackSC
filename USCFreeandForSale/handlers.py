@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import secrets
+import datetime
 
 import webapp2
 from google.appengine.api import search 
@@ -187,22 +188,36 @@ class UpdateItem(BaseRequestHandler):
       if (self.request.get('price').isdigit() ):
         item.price = float(self.request.get('price'))
       item.put()
+      AddItemSearchIndexes(item)
 
       self.redirect("/items")
 
 class DeleteItem(BaseRequestHandler):
-  def get(self, item_id):
-    self.post(item_id)
-
   def post(self, item_id):
     template_values={}
     if not self.logged_in:
-      self.redirect('auth/facebook')
+      self.redirect('/auth/facebook')
     else: 
       item = Item.get_by_id(int(item_id))
+      items_index = search.Index(name='items_search')
+      items_index.delete(item.key().id())
       db.delete(item.key())
-
+      # session flash?
       self.redirect("/items")
+
+class MarkAsSold(BaseRequestHandler):
+  def post(self, item_id):
+    if not self.logged_in:
+      self.redirect('/auth/facebook')
+    else:
+      item = Item.get_by_id(int(item_id))
+      items_index = search.Index(name='items_search')
+      item.sold_date = datetime.datetime.now()
+      item.put()
+      items_index.delete(item.key().id())
+      # session flash?
+      self.redirect('/items')
+
 
 
 class BrowsePage(BaseRequestHandler):
