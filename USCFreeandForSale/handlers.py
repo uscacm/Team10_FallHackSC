@@ -189,7 +189,7 @@ class SearchHandler(BaseRequestHandler):
         query = self.request.get('q')
         items_index = search.Index(name='items_search')
         if self.request.get('cat') and len(self.request.get('cat')) > 0:
-          search_results = items_index.search(query + 'AND category:"'+self.request.get('cat')+'"')
+          search_results = items_index.search(query + ' AND category:"'+self.request.get('cat')+'"')
         else:
           #search_results = items_index.search(query)
           search_results = items_index.search(query)
