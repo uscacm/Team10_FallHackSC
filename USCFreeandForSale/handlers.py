@@ -178,6 +178,14 @@ class UpdateItem(BaseRequestHandler):
       item.description = self.request.get('description')
       item.pickup_location = self.request.get('pickup_location')
       item.contact_method = self.request.get('contact')
+      if (self.request.get('file_url') != ' '):
+        photo_url = self.request.get('file_url')
+        item.photo_url = photo_url
+      if (self.request.get('category') != 'CATEGORY'):
+        category = Category.all().filter('name = ', self.request.get('category')).get()
+        item.category = category
+      if (self.request.get('price').isdigit() ):
+        item.price = float(self.request.get('price'))
       item.put()
 
       self.redirect("/items")
@@ -196,17 +204,6 @@ class DeleteItem(BaseRequestHandler):
 
       self.redirect("/items")
 
-class LookupItem(BaseRequestHandler):
-  def get(self, item_id):
-    self.post(item_id)
-
-  def post(self, item_id):
-    self.response.headers['Content-Type'] = 'application/json'
-    item = Item.get_by_id(item_id)
-    obj = {
-        'item_name': item.item_name 
-      } 
-    self.response.out.write(json.dumps(obj))
 
 class BrowsePage(BaseRequestHandler):
 

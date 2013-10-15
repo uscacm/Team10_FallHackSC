@@ -89,19 +89,19 @@ function closeModal(idString) {
     <ul class="small-block-grid-2">
       <div id="buyRequestArea">
 
-        {% for item in buy_requests %}
+        {% for request in buy_requests %}
 
         <!-- Single box --> 
         <div class="item_Box" id="item_Box_Pending_0">
           <div style="height:145px;">
             <ul class="pricing-table">
-              <li class="title">{{item.item_name}}</li>
-              <li class="description">Price: {{item.price}}</li>
-              <li class="description">Location: {{item.pickup_location}}</li>
+              <li class="title">ITEM NAME</li>
+              <li class="description">Name: {{request.from_user_obj.name}}</li>
+              <li class="description">Location: {{request.message}}</li>
             </ul>
           </div>
           <div class="cta-button" style="text-align:center;">
-            <a class="button" href="item/{{item.key().id()}}">More Info</a> 
+            <a class="button" href="#">Respond</a> 
           </div>
         </div>
 
@@ -165,13 +165,5 @@ function closeModal(idString) {
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
-<div class="row"> 
-  {% for request in buy_requests %}
-  <p>
-    {{ request.message }}
-    {{ request.from_user_obj }}
-  </p>
-  {% endfor %}
-</div>
 
 {% endblock %}
