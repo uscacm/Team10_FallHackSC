@@ -39,7 +39,8 @@ function openModel(itemID) {
   document.editform.pickup_location.value = document.getElementById("location"+itemID).innerHTML;
   document.editform.contact.value = document.getElementById("contact"+itemID).innerHTML;
 
-  document.getElementById('deleteButton').href= "/delete/" + itemID;
+
+  document.deleteitem.action = "/delete/" + itemID;
   document.editform.action = "/update/" + itemID;
 }
 
@@ -159,14 +160,16 @@ function closeModal(idString) {
       </fieldset>
     </form>
     
-    <fieldset>
-      <legend><h2>Delete</h2></legend>
-      <label><h3>Are you sure you want to delete this item?</h3></label>
-      <div class="cta-button"style="text-align:center;">
-        <a href="" id="deleteButton" class="button" style="width:100px">Yes</a><!--Fires the deleteItem function in the top script-->
-        <a onClick="closeModal('#editModal');" class="button" style="width:100px">No</a>
-      </div>
-    </fieldset>
+    <form method="post" action="" name="deleteitem">
+      <fieldset>
+        <legend><h2>Delete</h2></legend>
+        <label><h3>Are you sure you want to delete this item?</h3></label>
+        <div class="cta-button"style="text-align:center;">
+          <input type="submit" value="Yes" id="deleteButton" class="button" style="width:100px"></input>
+          <a onClick="closeModal('#editModal'); return false;" class="button" style="width:100px">No</a>
+        </div>
+      </fieldset>
+    </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
