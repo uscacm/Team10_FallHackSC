@@ -128,9 +128,9 @@ class SellPage(BaseRequestHandler):
 
     def post(self):
         template_values = {}
-        if not self.logged_in:
-          self.redirect('/auth/facebook')
-          self.session['next'] = '/sell'
+        if not self.logged_in:	  
+		   self.session['next'] = '/sell'
+		   self.redirect('/auth/facebook') 		  
         else:
           template_values['categories'] = self.category_list()
           template_values['current_user'] = self.current_user
