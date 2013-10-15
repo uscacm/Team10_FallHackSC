@@ -232,6 +232,10 @@ class ItemListPage(BaseRequestHandler):
     self.post()
 
   def post(self):
+    if not self.current_user:
+      self.redirect('/auth/facebook')
+      return
+      
     items = Item.all().filter('user = ', self.current_user.auth_ids[0]).fetch(40)
     template_values = {'items': items}
     self.render('myItems.html', template_values)
