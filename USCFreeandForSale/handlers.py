@@ -181,12 +181,12 @@ class SearchHandler(BaseRequestHandler):
     ### https://www.google.com/events/io/2011/sessions/full-text-search.html
     ### Need to insert items into the index when they get inserted into the db, update them aswell
     ###
-      if not self.request.get('q'):
-        self.abort(404)
-        return
-
       try:
         query = self.request.get('q')
+        term = self.request.get('q')
+        if not query:
+          query = ' '
+          term = ' (anything) '
         items_index = search.Index(name='items_search')
         if self.request.get('cat') and len(self.request.get('cat')) > 0:
           search_results = items_index.search(query + ' AND category:"'+self.request.get('cat')+'"')
@@ -196,7 +196,7 @@ class SearchHandler(BaseRequestHandler):
         getter_ids = []
         for result in search_results.results:
           getter_ids.append(long(result.doc_id))
-        template_values = {"results": search_results.results, "term": self.request.get('q'), "cat": self.request.get('cat'), "items": Item.get_by_id(getter_ids)}
+        template_values = {"results": search_results.results, "term": term, "cat": self.request.get('cat'), "items": Item.get_by_id(getter_ids)}
         self.render('search_results.html', template_values)
       except search.Error:
         logging.error('err!')
