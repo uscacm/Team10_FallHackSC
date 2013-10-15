@@ -176,7 +176,7 @@ class UpdateItem(BaseRequestHandler):
       item = Item.get_by_id(int(item_id))
       item.item_name = self.request.get('item_name')
       item.description = self.request.get('description')
-      item.pickup_location = self.request.get('location')
+      item.pickup_location = self.request.get('pickup_location')
       item.contact_method = self.request.get('contact')
       item.put()
 
@@ -195,6 +195,18 @@ class DeleteItem(BaseRequestHandler):
       db.delete(item.key())
 
       self.redirect("/items")
+
+class LookupItem(BaseRequestHandler):
+  def get(self, item_id):
+    self.post(item_id)
+
+  def post(self, item_id):
+    self.response.headers['Content-Type'] = 'application/json'
+    item = Item.get_by_id(item_id)
+    obj = {
+        'item_name': item.item_name 
+      } 
+    self.response.out.write(json.dumps(obj))
 
 class BrowsePage(BaseRequestHandler):
 

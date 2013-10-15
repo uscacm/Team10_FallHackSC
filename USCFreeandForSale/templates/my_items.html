@@ -24,16 +24,31 @@
 <script type="text/javascript">
 
 function openModel(itemID) {
+  //update form 
+  document.editform.item_name.value = document.getElementById("item_name"+itemID).innerHTML;
+  document.editform.description.value = document.getElementById("description"+itemID).innerHTML;
+  var photourl = document.getElementById("photo"+itemID).innerHTML;
+  if (photourl != "") {
+    document.getElementById(placeholder).src = photourl;
+    document.editform.file_url.value = photourl;
+  }
+  document.editform.price.value = document.getElementById("price"+itemID).innerHTML;
+  document.editform.pickup_location.value = document.getElementById("location"+itemID).innerHTML;
+  document.editform.contact.value = document.getElementById("contact"+itemID).innerHTML;
+
   document.getElementById('deleteButton').href= "/delete/" + itemID;
   document.editform.action = "/update/" + itemID;
-  return;
 }
 
-<!--Closes the modal with id idString, with syntax '#MODALNAME'-->
+//Closes the modal with id idString, with syntax '#MODALNAME'
 function closeModal(idString) {
   $(idString).foundation('reveal', 'close');
 }
 </script>
+
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 
 <div id="my_Items_Title">
   <h2>My Items</h2>
@@ -50,10 +65,13 @@ function closeModal(idString) {
           <div class="item_Box" id="item_Box_Pending_0">
             <div style="height:145px;">
               <ul class="pricing-table">
-                <li class="title">{{item.item_name}}</li>
-                <li class="description">Price: {{item.price}}</li>
-                <li class="description">Location: {{item.pickup_location}}</li>
+                <li class="title"><span id="item_name{{item.key().id()}}">{{item.item_name}}</span></li>
+                <li class="description">Price: <span id="price{{item.key().id()}}">{{item.price}}</span></li>
+                <li class="description">Location: <span id="location{{item.key().id()}}">{{item.pickup_location}}</span></li>
               </ul>
+              <div style="display: none;" id="description{{item.key().id()}}">{{item.description}}</div>
+              <div style="display: none;" id="photo{{item.key().id()}}">{{item.photo_url}}</div>
+              <div style="display: none;" id="contact{{item.key().id()}}">{{item.contact_method}}</div>
             </div>
             <div class="cta-button" style="text-align:center;" data-reveal-id="editModal" id="{{item.key().id()}}" onclick="openModel({{item.key().id()}});">
               <a class="button" href="#" >Edit/Delete Item</a>
@@ -101,7 +119,7 @@ function closeModal(idString) {
       <fieldset>
         <legend><h3>Edit Item</h3></legend>
         <label><h4>Title</h4></label>
-        <input type="text" name="item_name" placeholder="Title of your item" value="VALUE GOES HERE" />
+        <input type="text" id="item_name" name="item_name" placeholder="Title of your item" value="VALUE GOES HERE" />
         <label><h4>Description</h4></label>
         <textarea placeholder="Description of your item" id="descriptionEditor" style="width:100%; height:50px; resize:vertical;" name="description"> DESCRIPTION GOES HERE</textarea>
         <label><h4>Price</h4></label>
@@ -127,7 +145,7 @@ function closeModal(idString) {
         <!--End of upload photo section-->
         <input type="hidden" id= "url" name="file_url" value = "" />
         <label><h4>Location</h4></label>
-        <input type="text" id="locationEditor" name="location" placeholder="Where to get your item" value="LOCATION GOES HERE">
+        <input type="text" id="locationEditor" name="pickup_location" placeholder="Where to get your item" value="LOCATION GOES HERE">
         <label><h4>Contact Info</h4></label>
         <input type="text" placeholder="Email, phone, or anything else" name="contact">
         <div style="text-align:center; width:100%;">

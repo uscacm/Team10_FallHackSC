@@ -35,6 +35,7 @@ application = webapp2.WSGIApplication([
     Route(r'/item/<item_id:\d+>', 'handlers.ItemPage',     name='item'),
     Route(r'/update/<item_id:\d+>', 'handlers.UpdateItem',     name='update'),
     Route(r'/delete/<item_id:\d+>', 'handlers.DeleteItem',     name='delete'),
+    Route(r'/delete/<item_id:\d+>', 'handlers.LookupItem',     name='lookup'),
     Route('/category/<cat_slug>', 'handlers.BrowseCategoryPage', name='browse_category'),
     Route('/search', 'handlers.SearchHandler', name='search'),
 
