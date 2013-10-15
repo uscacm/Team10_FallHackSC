@@ -10,6 +10,9 @@
     display:inline-block;
     white-space:normal;
   }
+  .item_Box_padding {
+    margin: 4px;
+  }
   .scroll_Area {
     height:220px;
     overflow-x:auto;
@@ -85,27 +88,29 @@ function closeModal(idString) {
 
   <h3>Buy Requests</h3>
   <hr />
-  <div class="scroll_Area">
+  <div class="scroll_Area-not">
     <ul class="small-block-grid-2">
       <div id="buyRequestArea">
 
+        <ul>
+
         {% for request in buy_requests %}
 
-        <!-- Single box --> 
-        <div class="item_Box" id="item_Box_Pending_0">
-          <div style="height:145px;">
-            <ul class="pricing-table">
-              <li class="title">ITEM NAME</li>
-              <li class="description">Name: {{request.from_user_obj.name}}</li>
-              <li class="description">Location: {{request.message}}</li>
-            </ul>
+          <div class="item_Box item_Box_padding" id="item_Box_Pending_0">
+            <div style="height:145px;">
+              <ul class="pricing-table">
+                <li class="title">{{request.item.item_name}}</li>
+                <li class="description">Name: {{request.from_user_obj.name}}</li>
+                <li class="description">Message: {{request.message}}</li>
+              </ul>
+            </div>
+            <div class="cta-button" style="text-align:center;">
+              <a class="button small" href="#">Respond</a>
+              <button class="button small">Mark as sold</button>
+            </div>
           </div>
-          <div class="cta-button" style="text-align:center;">
-            <a class="button" href="#">Respond</a> 
-          </div>
-        </div>
-
         {% endfor %}
+        </ul>
 
       </div>
     </ul>

@@ -22,6 +22,7 @@ def AddItemSearchIndexes(item):
         fields.append(search.TextField(name='category', value=item.category.slug))
     if item.price:
         fields.append(search.NumberField(name='price', value=item.price))
+    
 
     new_search_document = search.Document(
         doc_id = str(item.key().id()),

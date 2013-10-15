@@ -50,6 +50,7 @@
 			<div class="row">
 				<h3>Seller Information</h3>
 			</div>
+			{% if item.contact_method %}
 			<div class="row">
 				<div class = "large-2 columns">
 					<h5>Contact:</h5>
@@ -60,6 +61,8 @@
 					</div>
 				</div>	
 			</div>
+			{% endif %}
+			{% if item.pickup_location %}
 			<div class="row">
 				<div class = "large-2 columns">
 					<h5>Location:</h5>
@@ -70,6 +73,7 @@
 					</div>
 				</div>	
 			</div>
+			{% endif %}
 			{% endif %}
 			<!-- Open Modal button -->
 			<div class="row">
