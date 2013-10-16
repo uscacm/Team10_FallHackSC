@@ -1,8 +1,3 @@
-{% extends "_base.html" %}
-
-{% block content %}
-
-<!-- <script src="/assets/js/facebook.js"></script> -->
 <script>
   window.fbAsyncInit = function() {
     // init the FB JS SDK
@@ -23,24 +18,4 @@
      js.src = "//connect.facebook.net/en_US/all.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-   
-  function sendMessage(itemID,userID) {
-	var userarr = userID.split(':');
-	alert(userarr[1]);
-	FB.ui({
-      method: 'send',
-	  to: userarr[1],
-      link: 'http://uscfreeandforsale.appspot.com/',
-	});
-};
 </script>
-Your request has been logged.
-<p>
-Seller: {{ to_user.auth_ids[0] }}<br> 
-Item Name: {{item.item_name}}
-<p>
-Do you want to send a FB message to the seller?
-<p>
-<div class="button" onClick="sendMessage({{item.key().id()}},{{to_user.auth_ids[0].split(':')[1]}})">Send Message</div>
-
-{% endblock %}
