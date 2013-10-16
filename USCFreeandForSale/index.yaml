@@ -10,15 +10,14 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Category
+  properties:
+  - name: visible
+  - name: sort
+
 - kind: Item
   properties:
   - name: category
   - name: sold_date
   - name: created
     direction: desc
-
-- kind: Category
-  properties:
-  - name: visible
-  - name: sort
-
