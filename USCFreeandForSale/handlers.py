@@ -61,7 +61,7 @@ class BaseRequestHandler(webapp2.RequestHandler):
     if categories is not None:
         return categories 
     else:
-       categories = Category.all().order('sort')
+       categories = Category.all().filter('visible = ', True).order('sort')
        if not memcache.set('categories', categories):
          logging.error('Memcache set failed.')
        return categories
