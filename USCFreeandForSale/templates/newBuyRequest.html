@@ -12,7 +12,7 @@
 	
 <h2>
 	{% if logged_in %}
-		Hi {{ current_user.name }}, sell your item below:
+		Hi {{ current_user.name }}, ask for something below:
 	{% else %}
 		Not logged in.
 	{% endif %}
@@ -60,7 +60,7 @@
 			<!-- Price stuff -->
 			<div class = "row">
 				<div class="large-5 columns">
-					<h6 class="title"> Price: </h6>
+					<h6 class="title"> Asking Price: </h6>
 				</div>
 				<div class="large-6 columns">
 					
@@ -72,26 +72,12 @@
 			</div>
 			
 			<!-- Category section -->
-			<div class="row">
-				<div class="large-5 columns">
-					<h6> Category: </h6>
-				</div>
-				<div class="large-6 columns">
-				
-					<select id="customDropdown" name="category">
 
-						<option value="CATEGORY" DISABLED SELECTED>Please Choose</option>
-						{% for category in categories %}
-							<option value="{{category.slug}}">{{category.name}}</option>
-						{% endfor %}
-					</select>
-					
-					
-				</div>
-				<!-- empty div to fill up space -->
-				<div class="large-1 columns"></div>
-			</div>
+			<input type="hidden" name="category" value="buy" />
+			<input type="hidden" name="is_buy_request" value="true" />
+
 				<br>
+
 			<!-- Photo area -->
 			<div class = "row">
 				<div class="large-5 columns">
@@ -128,6 +114,7 @@
 				
 			
 			<!-- Location stuff -->
+			<!--
 			<div class="row">
 				<div class="large-5 columns">
 					<h6 class="title"> Location: </h6>
@@ -137,9 +124,9 @@
 					<input type="text" name="location" placeholder="Location" />
 					
 				</div>
-				<!-- Empty div for spacing -->
+				
 				<div class="large-1 columns"></div>
-			</div>
+			</div>-->
 				
 			<!-- how to contact -->
 			<div class="row">
@@ -155,7 +142,7 @@
 				<div class="large-1 columns"></div>
 			</div>
 				
-			<br><button type="submit">Create Item</button><br>			
+			<br><button type="submit">Make Buy Request</button><br>			
 		</div>
 		</div>
 		

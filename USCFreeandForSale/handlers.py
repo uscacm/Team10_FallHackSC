@@ -111,6 +111,7 @@ class AddCategory(BaseRequestHandler):
   def get(self):
     if (Category.all().count() == 0):
       Category(name='Appliances', slug='appliances', visible=True).put()
+      Category(name='Buy Requests', slug='buy', visible=True).put()
       Category(name='Furniture', slug='furniture', visible=True).put()
       Category(name='Clothing', slug='clothing', visible=True).put()
       Category(name='Tickets', slug='tickets', visible=True).put()
@@ -137,6 +138,22 @@ class SellPage(BaseRequestHandler):
         template_values['current_user'] = self.current_user
         self.render('newItem.html', template_values)
 
+
+
+class BuyRequestPage(BaseRequestHandler):
+
+    def get(self): 
+        self.post()
+
+    def post(self):
+      template_values = {}
+      if not self.logged_in:    
+        self.session['next'] = '/buy'
+        self.redirect('/auth/facebook')       
+      else:
+        template_values['current_user'] = self.current_user
+        self.render('newBuyRequest.html', template_values)
+
 class AddItemPage(BaseRequestHandler):
   def post(self):
     logging.info(self.request)
@@ -154,7 +171,7 @@ class AddItemPage(BaseRequestHandler):
         photo_url = self.request.get('file_url')
         new_item.photo_url = photo_url
       if (self.request.get('category') != 'CATEGORY'):
-        category = Category.all().filter('name = ', self.request.get('category')).get()
+        category = Category.all().filter('slug = ', self.request.get('category')).get()
         new_item.category = category
       if (self.request.get('price').isdigit() ):
         new_item.price = float(self.request.get('price'))
