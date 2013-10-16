@@ -226,7 +226,14 @@ class BrowsePage(BaseRequestHandler):
       self.post()
 
   def post(self):
-    items = Item.all().fetch(limit=48)
+    ITEMS_PER_PAGE = 50
+    if self.request.get('page'):
+      page = int(self.request.get('page'))
+    else: page = 1
+    page -= 1 # offset for the first page
+    page *= ITEMS_PER_PAGE
+
+    items = Item.all().order('-created').fetch(limit=ITEMS_PER_PAGE, offset=page)
     template_values = {'items':items}
     self.render('items_list.html', template_values)
        
