@@ -233,7 +233,7 @@ class BrowsePage(BaseRequestHandler):
     page -= 1 # offset for the first page
     page *= ITEMS_PER_PAGE
 
-    items = Item.all().order('-created').fetch(limit=ITEMS_PER_PAGE, offset=page)
+    items = Item.all().order('-created').filter('sold_date = ', None).fetch(limit=ITEMS_PER_PAGE, offset=page)
     template_values = {'items':items}
     self.render('items_list.html', template_values)
        
@@ -308,7 +308,7 @@ class BrowseCategoryPage(BaseRequestHandler):
       if not category:
         self.abort(404)
       else:
-        template_values = {'category': category, 'items': category.items}
+        template_values = {'category': category, 'items': category.items.order('-created').filter('sold_date = ', None).fetch(50)}
         return self.render('category.html', template_values)
 
 class ItemPage(BaseRequestHandler):
