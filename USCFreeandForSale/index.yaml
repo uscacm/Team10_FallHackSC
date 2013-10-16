@@ -17,8 +17,7 @@ indexes:
   - name: created
     direction: desc
 
-- kind: Item
+- kind: Category
   properties:
-  - name: sold_date
-  - name: created
-    direction: desc
+  - name: visible
+  - name: sort
