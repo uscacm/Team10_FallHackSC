@@ -1,8 +1,8 @@
 <div class="panel">
     <li data-orbit-slide="headline-1">
         <div class="large-8 large-offset-2 columns"/>
-        <h2>{{item.item_name}}</h2>
-        <h3>{{item.description}}</h3>
+        <h2 style="overflow:hidden; height:40px; text-overflow: ellipsis;">{{item.item_name}}</h2>
+        <h3 style="overflow:hidden; height:85px; text-overflow: ellipsis;">{{item.description}}</h3>
         <div class="cta-button"><a class="button" href="/item/{{item.key().id()}}">More Info</a></div>
     </li>
 </div>
