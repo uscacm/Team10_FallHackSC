@@ -55,7 +55,7 @@ class Item(db.Model):
     created = db.DateProperty(auto_now_add=True)
 
 class BuyRequest(db.Model):
-    message = db.StringProperty(required=False)
+    message = db.TextProperty(required=False)
     phone = db.StringProperty(required=False)
     from_user = db.StringProperty(required=True)
     item = db.ReferenceProperty(Item, required=True, collection_name='buy_requests')
