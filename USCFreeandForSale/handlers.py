@@ -292,7 +292,8 @@ class SearchHandler(BaseRequestHandler):
         getter_ids = []
         for result in search_results.results:
           getter_ids.append(long(result.doc_id))
-        template_values = {"results": search_results.results, "term": term, "cat": self.request.get('cat'), "items": Item.get_by_id(getter_ids)}
+        items = Item.get_by_id(getter_ids)
+        template_values = {"results": search_results.results, "term": term, "cat": self.request.get('cat'), "items": items}
         self.render('search_results.html', template_values)
       except search.Error:
         logging.error('err!')

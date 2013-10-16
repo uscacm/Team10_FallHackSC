@@ -10,7 +10,7 @@
   </div>
 
 {% for item in items %}
- 
+{% if item != None: %} 
   {% if items.index(item) % 3 == 0 %}
 	<div class="row">
   {% endif %}
@@ -20,7 +20,7 @@
   {% if items.index(item) % 3 == 2 %}
 	</div class="row">
   {% endif %}
-
+{% endif %}
 {% else %}
 
   <h4>No items found.</h4>
